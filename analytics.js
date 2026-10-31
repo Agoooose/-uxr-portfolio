@@ -1,5 +1,5 @@
 // GA4 统计：所有页面共用。拿到 Measurement ID 后只改下面这一行。
-const GA_ID = 'G-XXXXXXXXXX';
+const GA_ID = 'G-SPK9NWYV7H';
 
 (function () {
   // 还没填真实 ID 时不加载 GA，也不发任何请求
