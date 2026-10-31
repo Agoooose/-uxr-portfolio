@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bounce Rate Research · Sixian Chen</title>
+<meta name="description" content="Resolving a high bounce rate with rapid mixed-methods research.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bounce Rate Research · Sixian Chen">
+<meta property="og:description" content="Resolving a high bounce rate with rapid mixed-methods research.">
+<meta property="og:url" content="https://research.sixianchen.com/iu-peer-coach.html">
+<meta property="og:image" content="https://research.sixianchen.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* 版式按 Google Beam 案例页实测（单栏通排）；导航 / footer / 卡片与 index.html 一致 */
+  :root {
+    --text: #0a0a0a;
+    --heading: #111111;
+    --body: rgb(43, 43, 43);
+    --label: rgb(107, 114, 128);
+    --accent: rgb(27, 97, 201);
+    --accent-strong: rgb(37, 99, 235);
+    --ring: rgba(0, 0, 0, 0.06);
+    --line: rgba(10, 10, 10, 0.1);
+    --media: #e4e4e7;
+    --media-border: #f4f4f5;
+    --bg: #ffffff;
+    --max: 1120px;
+    --gutter: 24px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .container {
+    max-width: calc(var(--max) + var(--gutter) * 2);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  /* 媒体占位：往 .media 里放 <img> 或 <video> 会自动铺满 */
+  .media {
+    position: relative;
+    overflow: hidden;
+    background: var(--media);
+    border-radius: 16px;
+  }
+  .media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--media-border);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .media > img, .media > video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  /* ---------- Nav (同 index.html) ---------- */
+  .nav { position: sticky; top: 0; z-index: 10; background: var(--bg); }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 57px;
+    padding: 0 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .avatar { flex: none; height: 32px; }
+  .avatar > img { display: block; height: 100%; width: auto; }
+  .brand span, .nav-links {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: -0.3px;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { transition: opacity .2s; }
+  .nav-links a:hover { opacity: .55; }
+
+  /* ---------- Type ---------- */
+  .page-title {
+    font-family: "Instrument Sans", "Inter", sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+  }
+  .eyebrow {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: -0.14px;
+    color: var(--accent);
+  }
+  .eyebrow--sub { color: var(--label); }
+  .h2 {
+    margin-top: 10px;
+    font-family: "Instrument Sans", "Inter", sans-serif;
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: var(--heading);
+  }
+  .h3 {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: var(--heading);
+  }
+  .h4 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 26px;
+    letter-spacing: -0.04em;
+    color: var(--heading);
+  }
+  .body {
+    font-size: 17px;
+    line-height: 27.2px;
+    letter-spacing: -0.34px;
+    color: var(--body);
+  }
+  .body + .body { margin-top: 20px; }
+  .h2 + .body, .eyebrow + .body { margin-top: 10px; }
+  .h3 + .body, .eyebrow + .h3 { margin-top: 16px; }
+  .h4 + .body { margin-top: 10px; }
+
+  /* ---------- Intro: 标题 + 基本信息 + TL;DR ---------- */
+  .intro { padding-top: 56px; }
+  .facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    margin-top: 56px;
+  }
+  .fact-full { grid-column: 1 / -1; }
+  .fact-label { font-size: 14px; font-weight: 500; line-height: 21px; letter-spacing: -0.28px; color: var(--label); }
+  .fact-value { margin-top: 6px; font-size: 17px; line-height: 27.2px; letter-spacing: -0.34px; color: var(--body); }
+  /* TL;DR 里的关键数字 */
+  .metric { color: var(--accent); font-weight: 600; white-space: nowrap; }
+  /* 带连字符的词不在连字符处断行 */
+  .nowrap { white-space: nowrap; }
+
+  /* ---------- Sections ---------- */
+  .section { padding-top: 160px; }
+  .intro + .section { padding-top: 80px; }
+  .group + .group { margin-top: 88px; }
+  /* 方法分段 banner，配色同对比表里选中的蓝色列 */
+  .method-banner {
+    padding: 20px 24px;
+    border-radius: 4px;
+    background: var(--accent-strong);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+  .section:has(> .method-banner) + .section { padding-top: 64px; }
+  .wide-media { margin-top: 40px; aspect-ratio: 1120 / 467; }
+  /* 按图片原比例完整显示，不裁切 */
+  .wide-media.media--natural { aspect-ratio: auto; }
+  .media--natural > img { height: auto; }
+
+  /* 研究方法对比表：风格参考 tablereferece.jpg（选中列整块蓝底白字，其余米色底） */
+  .rq { margin-top: 64px; }
+  .rq .h3 + .method-table-wrap { margin-top: 24px; }
+  .method-table-wrap { margin-top: 40px; overflow-x: auto; }
+  .method-table {
+    --pick: rgb(37, 99, 235);
+    --sand: #f4f4f5;
+    width: 100%;
+    min-width: 900px;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    font-size: 13px;
+    line-height: 18px;
+    color: #111;
+  }
+  .method-table th, .method-table td { padding: 16px 14px; text-align: left; vertical-align: top; }
+  .method-table thead th {
+    padding-top: 18px;
+    padding-bottom: 28px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+  .method-table th.dim, .method-table td.dim { width: 15%; background: none; }
+  .method-table tbody th.dim {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: -0.28px;
+    color: var(--label);
+    border-top: 1px solid var(--line);
+  }
+  .method-table .pick { background: var(--pick); color: #fff; }
+  .method-table .rest { background: var(--sand); }
+  .method-table tbody .pick { border-top: 1px solid rgba(255, 255, 255, 0.28); }
+  .method-table tbody .rest { border-top: 1px solid rgba(0, 0, 0, 0.12); }
+  .method-table thead .pick:nth-child(2) { border-top-left-radius: 4px; }
+  .method-table tbody tr:last-child .pick:nth-child(2) { border-bottom-left-radius: 4px; }
+  .method-table thead th:last-child { border-top-right-radius: 4px; }
+  .method-table tbody tr:last-child td:last-child { border-bottom-right-radius: 4px; }
+  .cell { display: flex; gap: 8px; align-items: flex-start; }
+  .ic { flex: none; width: 14px; height: 14px; margin-top: 2px; }
+  .pick .ic { --dot: #fff; --mark: var(--pick); }
+  .rest .ic { --dot: #111; --mark: var(--sand); }
+
+  /* 流程图：步骤关键词 + 下方细节 */
+  .flow {
+    display: grid;
+    grid-template-columns: 1fr 48px 1fr 48px 1fr;
+    align-items: start;
+  }
+  .flow-key {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 16px 20px;
+    border: 1.5px solid var(--accent-strong);
+    border-radius: 4px;
+    color: var(--accent-strong);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+  .flow-n { font-size: 13px; font-weight: 500; opacity: .7; letter-spacing: 0; }
+  .flow-arrow { display: flex; justify-content: center; height: 58px; align-items: center; color: var(--label); }
+  .flow-arrow svg { width: 22px; height: 22px; }
+  .flow-details { margin-top: 16px; }
+
+  /* VoC 词云面板：结构照 wordcloud.png，配色换成网站的蓝 / 灰 */
+  .voc-panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .voc-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 0 0 1px var(--ring);
+  }
+  .voc-title {
+    width: 60%;
+    margin: 0 auto;
+    padding: 9px 0;
+    border: 1.5px solid var(--accent-strong);
+    border-radius: 4px;
+    color: var(--accent-strong);
+    text-align: center;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .voc-top {
+    width: fit-content;
+    margin: 20px auto 24px;
+    padding: 0;
+    list-style: none;
+    color: var(--body);
+    font-size: 17px;
+    line-height: 30px;
+    letter-spacing: -0.34px;
+  }
+  .voc-top li { display: flex; align-items: center; gap: 14px; }
+  .voc-top li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-strong); }
+  .voc-cloud {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: baseline;
+    gap: 2px 8px;
+    min-height: 280px;
+    padding: 14px 10px;
+    border-radius: 8px;
+    background: rgba(37, 99, 235, 0.04);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .w-g { color: var(--accent-strong); }
+  .w-k { color: #8a8f98; }
+  .w1 { font-size: 38px; font-weight: 600; }
+  .w2 { font-size: 26px; font-weight: 600; }
+  .w3 { font-size: 19px; font-weight: 500; }
+  .w4 { font-size: 14px; }
+  .w5 { font-size: 11px; }
+
+  /* 左窄右宽分区 */
+  .split {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    column-gap: 64px;
+    align-items: start;
+  }
+  .split > .left .h2 { font-size: 38px; }
+  .split .thumb { aspect-ratio: 280 / 220; border-radius: 12px; }
+  .thumb--pink { background: rgb(252, 228, 232); }
+  .thumb--yellow { background: rgb(254, 243, 219); }
+  .thumb--blue { background: rgb(219, 234, 254); }
+
+  /* 01 / 02 编号列表 */
+  .steps { list-style: none; margin-top: 24px; }
+  .steps li {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    font-size: 17px;
+    line-height: 27.2px;
+    letter-spacing: -0.34px;
+    color: var(--body);
+  }
+  .steps li + li { margin-top: 20px; }
+  .steps .n { font-size: 16px; font-weight: 500; line-height: 27.2px; color: #000; }
+  /* Key Insights：编号列表放大成 28px 标题字号 */
+  .eyebrow + .steps.insights { margin-top: 16px; }
+  .steps.insights li {
+    grid-template-columns: 56px 1fr;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: var(--heading);
+  }
+  .steps.insights li + li { margin-top: 24px; }
+  .steps.insights .n { font-size: 28px; line-height: 1.2; font-weight: 500; color: var(--accent); }
+
+  /* 2x2 白色卡片 */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .h3 + .cards { margin-top: 14px; }
+  .h2 + .cards { margin-top: 40px; }
+  .media + .cards { margin-top: 24px; }
+  .cards--3 { grid-template-columns: repeat(3, 1fr); }
+  .card .fact-label + .body { margin-top: 8px; }
+  .card .h4 + .body { margin-top: 6px; }
+  .h2 + .pair { margin-top: 40px; }
+  /* 卡片里的大号数字 */
+  .stat { margin-top: 8px; font-size: 40px; font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--heading); }
+  .stat + .body { margin-top: 10px; }
+  .bars + .body { margin-top: 16px; }
+  /* 卡片里的横向对比条 */
+  .bars { display: grid; gap: 12px; margin-top: 12px; }
+  .bar-row { display: grid; grid-template-columns: 1fr auto; align-items: baseline; row-gap: 6px; }
+  .bar-label { font-size: 14px; color: var(--body); }
+  .bar-num { font-size: 24px; font-weight: 500; letter-spacing: -0.02em; color: var(--heading); }
+  .bar-track { grid-column: 1 / -1; height: 8px; border-radius: 4px; background: #f0f0f2; overflow: hidden; }
+  .bar-fill { display: block; height: 100%; border-radius: 4px; background: var(--accent); }
+  .bar-fill--muted { background: #a1a1aa; }
+  .pair + .quote, .cards + .quote { margin-top: 24px; }
+  .pair + .pair-note { margin-top: 32px; }
+  /* 利益相关方引用 */
+  .quote { margin: 0; padding: 32px 40px; border-radius: 16px; background: #f4f4f5; }
+  .quote p { margin: 0; font-size: 24px; line-height: 1.4; letter-spacing: -0.02em; color: var(--heading); }
+  .quote cite { display: block; margin-top: 16px; font-size: 14px; font-style: normal; color: var(--label); }
+  .body + .flow { margin-top: 40px; }
+  .sig-eg { font-weight: 600; color: var(--heading); }
+  .sig { color: rgb(220, 38, 38); }
+  .card {
+    padding: 24px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 0 0 1px var(--ring);
+  }
+  .card-label {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 27.2px;
+    letter-spacing: -0.34px;
+    color: var(--accent-strong);
+  }
+  .card-label + .body { margin-top: 4px; }
+  /* 招募信息卡：标签在左上，信息左对齐、在剩余空间里垂直居中 */
+  .card--message { display: flex; flex-direction: column; }
+  .card--message .message {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .card-list {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    font-size: 17px;
+    line-height: 27.2px;
+    letter-spacing: -0.34px;
+    color: var(--body);
+  }
+  .card-list li + li { margin-top: 4px; }
+  .card-list + .body { margin-top: 16px; }
+
+  /* 两列并排 */
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+  }
+
+  /* ---------- More projects (同 index.html 卡片，缩小版) ---------- */
+  .more { padding-top: 180px; }
+  .more .h2 { color: var(--accent-strong); margin-top: 0; }
+  .more-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 39px;
+  }
+  .more-card .media { aspect-ratio: 352 / 191; border-radius: 26px; transition: transform .3s ease-out; }
+  /* hover：图片微缩 + 暗色遮罩淡入 + 标题变蓝，均 300ms ease-out */
+  .more-card .media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.14);
+    opacity: 0;
+    transition: opacity .3s ease-out;
+    pointer-events: none;
+  }
+  .more-card:hover .media { transform: scale(.99); }
+  .more-card:hover .media::before { opacity: 1; }
+  .more-card-title { transition: color .3s ease-out; }
+  .more-card:hover .more-card-title { color: rgb(37, 99, 235); }
+  /* 封面图主体缩小：图片按比例收进卡片，底色补齐四周 */
+  .media--iu { background: #fff !important; }
+  .media--meitu { background: #fff !important; }
+  .media--iu > img { object-fit: contain; transform: scale(.62); }
+  .media--lock { background: linear-gradient(135deg, rgb(44, 77, 193), rgb(97, 124, 237)) !important; }
+  .media--lock > img { transform: scale(.8); -webkit-mask-image: radial-gradient(ellipse 50% 50% at center, #000 82%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at center, #000 82%, transparent 100%); }
+  .more-card-title { padding: 6px 8px 0; font-size: 14px; line-height: 19.25px; letter-spacing: 0.07px; }
+  .more-tags { display: flex; flex-wrap: wrap; gap: 5px; padding: 8px 8px 0; }
+  .more-tags span {
+    display: inline-flex;
+    align-items: center;
+    height: 23px;
+    padding: 0 8px;
+    border: 1px solid var(--media-border);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #18181b;
+  }
+
+  /* ---------- Footer (同 index.html) ---------- */
+  .footer { padding-top: 240px; }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+  }
+  .footer-label { font-size: 15px; font-weight: 500; line-height: 15px; letter-spacing: -0.15px; color: #2d2d2d; }
+  .socials { display: flex; gap: 28px; color: rgb(8, 8, 8); }
+  .socials a { display: flex; transition: opacity .2s; }
+  /* 邮箱图标：点击复制地址，上方提示 */
+  .copy-email { position: relative; }
+  .copy-tip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #0a0a0a;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+  }
+  .copy-email:hover .copy-tip, .copy-email:focus-visible .copy-tip, .copy-tip.show { opacity: 1; }
+  .socials a.copy-email:hover { opacity: 1; }
+  .copy-email svg { transition: opacity .2s; }
+  .copy-email:hover svg { opacity: .5; }
+  .socials a:hover { opacity: .5; }
+  .socials svg { width: 26px; height: 26px; }
+
+  /* ---------- Phone (按 390 宽实测) ---------- */
+  @media (max-width: 809px) {
+    :root { --gutter: 20px; }
+    .nav-inner { height: 56px; padding-right: 18px; }
+    .nav-links { font-size: 14px; line-height: 17px; letter-spacing: normal; gap: 0; }
+    .nav-links a:nth-child(1) { margin-right: 43px; }
+    .nav-links a:nth-child(2) { margin-right: 30px; }
+    .brand span { display: none; }
+
+    .intro { padding-top: 40px; }
+    .page-title { font-size: 32px; line-height: 1.24; letter-spacing: -0.02em; }
+    .facts { grid-template-columns: 1fr; gap: 24px; }
+    .fact-label { font-size: 12px; line-height: 18px; letter-spacing: -0.24px; }
+    .fact-value { font-size: 14px; line-height: 22.4px; letter-spacing: normal; }
+
+    .eyebrow { font-size: 12px; font-weight: 400; line-height: 18px; }
+    .h2, .split > .left .h2 { font-size: 24px; line-height: 1.32; letter-spacing: -0.02em; }
+    .h3 { font-size: 20px; }
+    .h4 { font-size: 18px; }
+    .body, .steps li { font-size: 14px; line-height: 22.4px; letter-spacing: normal; }
+    .steps .n { font-size: 14px; line-height: 22.4px; }
+    .steps.insights li, .steps.insights .n { font-size: 20px; line-height: 1.3; }
+    .steps.insights li { grid-template-columns: 40px 1fr; }
+    .card-label { font-size: 14px; line-height: 22.4px; }
+    .card-list { font-size: 14px; line-height: 22.4px; letter-spacing: normal; }
+
+    .section { padding-top: 104px; }
+    .intro + .section { padding-top: 64px; }
+    .group + .group { margin-top: 64px; }
+    .wide-media { margin-top: 24px; aspect-ratio: 350 / 166; }
+    .body + .flow { margin-top: 24px; }
+    .stat { font-size: 32px; }
+    .quote { padding: 24px; }
+    .quote p { font-size: 18px; }
+    .wide-media.media--natural { aspect-ratio: auto; }
+
+    .split { grid-template-columns: 1fr; row-gap: 24px; }
+    .flow { grid-template-columns: 1fr; }
+    .voc-panels { grid-template-columns: 1fr; }
+    .flow-arrow { height: 40px; }
+    .flow-arrow svg { transform: rotate(90deg); }
+    .split .thumb { max-width: 280px; }
+    .cards, .cards--3, .pair, .more-grid { grid-template-columns: 1fr; }
+    .pair { gap: 32px; }
+    .more { padding-top: 120px; }
+    .more-grid { gap: 40px; margin-top: 24px; }
+
+    .footer { padding-top: 132px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+
+  /* 手机端：方法对比表改成上下排列，每种方法一块（由下方脚本从表格生成） */
+  .method-stack { display: none; }
+  @media (max-width: 809px) {
+    .method-table-wrap .method-table { display: none; }
+    .method-stack { --pick: rgb(37, 99, 235); --sand: #f4f4f5; display: flex; flex-direction: column; gap: 12px; }
+    .method-stack .m {
+      padding: 16px 16px 4px;
+      border-radius: 8px;
+      background: #f4f4f5;
+      color: #111;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .method-stack .m.pick { background: rgb(37, 99, 235); color: #fff; }
+    .method-stack .m-name { margin-bottom: 8px; font-size: 18px; font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; }
+    .method-stack .m-row { padding: 12px 0; border-top: 1px solid rgba(0, 0, 0, 0.12); }
+    .method-stack .m.pick .m-row { border-top-color: rgba(255, 255, 255, 0.28); }
+    .method-stack .m-dim { margin-bottom: 4px; font-size: 12px; font-weight: 500; line-height: 16px; opacity: .7; }
+  }
+</style>
+<script src="analytics.js" defer></script>
+</head>
+<body>
+
+<!-- 对比表图标 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-yes" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" style="fill: var(--dot)"/><path d="m6 10.2 2.6 2.6L14 7.4" style="fill: none; stroke: var(--mark); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"/></symbol>
+  <symbol id="i-mid" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" style="fill: var(--dot)"/><path d="M6.5 10h7" style="fill: none; stroke: var(--mark); stroke-width: 2; stroke-linecap: round"/></symbol>
+  <symbol id="i-no" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" style="fill: var(--dot)"/><path d="m7 7 6 6m0-6-6 6" style="fill: none; stroke: var(--mark); stroke-width: 2; stroke-linecap: round"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="./" class="brand">
+        <div class="avatar"><img src="avatar.png" alt="Sixian Chen"></div>
+        <span>Sixian Chen</span>
+      </a>
+      <nav class="nav-links">
+        <a href="./">Work</a>
+        <a href="about.html">About</a>
+        <a href="https://drive.google.com/file/d/1PsuJZk3iySAaY9Ku3GlWY91uNizDfZkY/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Intro -->
+  <section class="container intro">
+    <h1 class="page-title">Resolving a high bounce rate with rapid <span class="nowrap">mixed-methods</span> research</h1>
+    <div class="facts">
+      <div><p class="fact-label">Timeline</p><p class="fact-value">3 weeks</p></div>
+      <div><p class="fact-label">Role</p><p class="fact-value">Solo UX Researcher</p></div>
+      <div><p class="fact-label">Team</p><p class="fact-value">Project Manager<br>Developer</p></div>
+      <div><p class="fact-label">Methods</p><p class="fact-value">Web Analytics<br>Heatmap Analysis<br>User Interviews<br>Usability Testing<br>Prototyping</p></div>
+      <div class="fact-full"><p class="fact-label">TL;DR</p><p class="fact-value">I led this rapid research project end to end, partnering with business stakeholders to identify problems and implement changes that lifted sign-up conversion from <strong class="metric">9.3% to 24.7%</strong> within a month, alongside a <strong class="metric">10% drop in bounce rate</strong> and an <strong class="metric">80%+ task success rate</strong>. I took a mixed-methods approach: website analytics revealed what was going wrong, and user interviews and usability testing explained why.</p></div>
+    </div>
+  </section>
+
+  <!-- Context -->
+  <section class="container section">
+    <div class="group">
+      <p class="eyebrow">Context</p>
+      <h2 class="h2">Spotting a high-traffic page that was losing visitors</h2>
+      <p class="body">At Indiana University, I owned routine performance reporting and benchmarking for 35 university websites. One page stood out: the landing page for Peer Coach, a service from the undergraduate education office where trained undergraduates coach younger students on academics and careers. The page had an 85% bounce rate, and only 9.3% of visitors went on to the sign-up page. Because it draws heavy daily traffic, I prioritized it for deeper research.</p>
+      <div class="wide-media media media--natural"><img src="assets/peer-coach/before-landing.png" alt="The original IU Peer Coaches landing page: a long bulleted list of what peer coaches can help with and no clear call to action"></div>
+    </div>
+  </section>
+
+  <!-- Forming Hypotheses：章节标题 + 热力图占位 + 两张假设卡片 -->
+  <section class="container section">
+    <div class="group">
+      <p class="eyebrow">Forming Hypotheses</p>
+      <h2 class="h2">Reading behavior data to see where visitors dropped off</h2>
+      <p class="body">I started by building hypotheses from the site&rsquo;s behavior data: heatmaps, click maps, traffic sources, site search queries and user journeys. A UX audit of the page alongside the heatmap flagged a wall of text, weak visual hierarchy, no clear call to action, key information hidden in accordions, and two different services sharing one page.</p>
+      <div class="wide-media media media--natural"><img src="assets/peer-coach/ux-audit-heatmap.png" alt="UX audit of the original landing page with heatmap hotspots on Make an Appointment and Current Peer Coaches, annotated for lack of CTA and a text wall"></div>
+      <div class="cards cards--3">
+        <div class="card">
+          <p class="fact-label">Traffic Source</p>
+          <p class="stat">58.2%</p>
+          <p class="body">came directly and another 23.9% from the admissions website. Students arrived on purpose, so intent wasn&rsquo;t the problem.</p>
+        </div>
+        <div class="card">
+          <p class="fact-label">Next Step</p>
+          <div class="bars">
+            <div class="bar-row">
+              <span class="bar-label">Current coach info</span><span class="bar-num">14.4%</span>
+              <span class="bar-track"><span class="bar-fill" style="width: 100%"></span></span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Schedule an appointment</span><span class="bar-num">5.4%</span>
+              <span class="bar-track"><span class="bar-fill bar-fill--muted" style="width: 37.5%"></span></span>
+            </div>
+          </div>
+          <p class="body">Nearly 3&times; more visitors checked the coaches than tried to book. Students wanted to see who they&rsquo;d meet first, and the workflow got in the way.</p>
+        </div>
+        <div class="card">
+          <p class="fact-label">Scroll Depth</p>
+          <p class="stat">25.6%</p>
+          <p class="body">average scroll depth. Most visitors never got past the top of the page, which suggested the content wasn&rsquo;t answering their questions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Choosing Methods：章节标题 + 方法对比表 -->
+  <section class="container section">
+    <div class="group">
+      <p class="eyebrow">Choosing Methods</p>
+      <h2 class="h2">Moving to primary research to quickly validate the hypotheses</h2>
+      <div class="rq">
+        <p class="eyebrow eyebrow--sub">Research Question</p>
+        <h3 class="h3">Why were visitors leaving the landing page without signing up?</h3>
+        <div class="method-table-wrap">
+          <table class="method-table">
+            <thead>
+              <tr><th class="dim"></th><th class="pick" scope="col">User Interviews + Moderated Usability Testing</th><th class="rest" scope="col">Survey</th><th class="rest" scope="col">Unmoderated Usability Testing</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="dim" scope="row">Time &amp; cost</th>
+                <td class="pick"><div class="cell"><svg class="ic" role="img" aria-label="Strength"><use href="#i-yes"/></svg><span>My office was in the library, so I could reach students on the spot</span></div></td>
+                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Trade-off"><use href="#i-mid"/></svg><span>Quick to send, but slow to collect enough responses</span></div></td>
+                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Limitation"><use href="#i-no"/></svg><span>Needs a testing platform and a paid participant panel</span></div></td>
+              </tr>
+              <tr>
+                <th class="dim" scope="row">Generalizability</th>
+                <td class="pick"><div class="cell"><svg class="ic" role="img" aria-label="Trade-off"><use href="#i-mid"/></svg><span>Small sample, but analytics already covered the broad patterns</span></div></td>
+                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Strength"><use href="#i-yes"/></svg><span>Large sample, results generalize</span></div></td>
+                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Trade-off"><use href="#i-mid"/></svg><span>Larger sample than moderated sessions</span></div></td>
+              </tr>
+              <tr>
+                <th class="dim" scope="row">Depth of insight</th>
+                <td class="pick"><div class="cell"><svg class="ic" role="img" aria-label="Strength"><use href="#i-yes"/></svg><span>Can watch real behavior and ask why in the moment</span></div></td>
+                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Limitation"><use href="#i-no"/></svg><span>Shows what, not why</span></div></td>
+                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Trade-off"><use href="#i-mid"/></svg><span>Shows behavior, but no follow-up questions</span></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Study Design：三张并排卡片（被试 / 访谈问题 / 测试任务） -->
+  <section class="container section">
+    <div class="group">
+      <p class="eyebrow">Study Design</p>
+      <h2 class="h2">Recruiting on the spot and pairing interviews with a realistic task</h2>
+      <div class="cards cards--3">
+        <div class="card">
+          <p class="fact-label">Participants</p>
+          <ul class="card-list">
+            <li>8 undergraduate students</li>
+            <li>Not working in the undergraduate education office</li>
+            <li>Recruited on the spot in the library</li>
+            <li>Every participant did both the interview and the test</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="fact-label">Interview</p>
+          <ul class="card-list">
+            <li>Do you need academic advice (choosing or changing a major) or career advice (finding internships, planning a career path)? What does that look like?</li>
+            <li>What kind of help do you need most, and who do you think could help you?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="fact-label">Usability Test</p>
+          <p class="body">Starting from the landing page, imagine your advisor just sent you this resource. Decide whether you would schedule an appointment, and think aloud as you go.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insights：编号列表 -->
+  <section class="container section">
+    <div class="group">
+      <p class="eyebrow">Key Insights</p>
+      <h2 class="h2">The sessions confirmed the hypotheses and surfaced two more problems</h2>
+      <ol class="steps insights">
+        <li><span class="n">01</span><span>Students want to see a coach&rsquo;s profile before deciding to book.</span></li>
+        <li><span class="n">02</span><span>Students with academic needs and those with career needs are two distinct groups.</span></li>
+        <li><span class="n">03</span><span>Students can&rsquo;t tell &ldquo;Peer Academic Coaches&rdquo; from &ldquo;Career Peers,&rdquo; or which one fits them.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Personas：两张并排卡片 -->
+  <section class="container section">
+    <div class="group">
+      <p class="eyebrow">Personas</p>
+      <h2 class="h2">Two groups of students, two different questions</h2>
+      <div class="cards">
+        <div class="card">
+          <p class="fact-label">Persona 1</p>
+          <h3 class="h4">The Major Explorer</h3>
+          <p class="body">First-year students admitted without a declared major, weighing which major to choose in their second year.</p>
+          <p class="body">They want to know:</p>
+          <ul class="card-list">
+            <li>How to explore their interests through courses and extracurriculars</li>
+            <li>How seniors who chose or switched majors made their decision</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="fact-label">Persona 2</p>
+          <h3 class="h4">The Career Planner</h3>
+          <p class="body">Students who have already declared a major and are looking ahead to life after college.</p>
+          <p class="body">They want to know:</p>
+          <ul class="card-list">
+            <li>How to find an internship</li>
+            <li>What jobs their major can lead to</li>
+            <li>How to explore different career paths</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Design Decisions：两列并排 + 前后对比图占位 -->
+  <section class="container section">
+    <div class="group">
+      <p class="eyebrow">Design Decisions</p>
+      <h2 class="h2">Turning insights into two product changes</h2>
+      <div class="pair">
+        <div>
+          <h3 class="h4">Brought coach profiles onto the page</h3>
+          <p class="body">Coach profiles used to live only inside the scheduling system. I partnered with the developer to embed them on the web page, so students could see who the coaches were, and get interested, before deciding to book.</p>
+        </div>
+        <div>
+          <h3 class="h4">Split academic and career into two journeys</h3>
+          <p class="body">Instead of one page for both services, the landing page now sends students down separate academic and career paths from the start. Each group sees content that matches its needs and no longer has to guess which coach to pick.</p>
+        </div>
+      </div>
+      <p class="body pair-note">Alongside these, I added photos and student testimonials to the landing page, rewrote the content to answer the questions students actually asked, and cut the page from four screens of scrolling to two.</p>
+      <div class="wide-media media media--natural"><img src="assets/peer-coach/userflow-before-after.png" alt="User flow before and after: before, students emailed by an advisor wondered how a session helps and who they would meet, then bounced; after, they pick an academic or career coach, see a coach profile, and schedule an appointment"></div>
+      <div class="wide-media media media--natural"><img src="assets/peer-coach/design-solution.png" alt="Redesigned pages: a new landing page with photos and a student testimonial that splits into Peer Academic Coaches and Career Peers, plus two information pages with embedded coach profiles"></div>
+    </div>
+  </section>
+
+  <!-- Impact：三张数字卡片 + 利益相关方引用 -->
+  <section class="container section">
+    <p class="eyebrow">Impact</p>
+    <div class="cards cards--3">
+      <div class="card">
+        <p class="fact-label">Sign-up Conversion</p>
+        <p class="stat">9.3% &rarr; 24.7%</p>
+        <p class="body">Conversion from the landing page to sign-up more than doubled within a month of launch.</p>
+      </div>
+      <div class="card">
+        <p class="fact-label">Bounce Rate</p>
+        <p class="stat">&minus;10%</p>
+        <p class="body">Fewer students left the landing page without taking a next step.</p>
+      </div>
+      <div class="card">
+        <p class="fact-label">Task Success</p>
+        <p class="stat">80%+</p>
+        <p class="body">In usability testing of the new design, more than 80% of students found the right coach and decided whether to book without help.</p>
+      </div>
+    </div>
+    <blockquote class="quote">
+      <p>&ldquo;Now I can see a peak in our coaching appointments after I send out an email. I&rsquo;m happy that students are now making better use of the university resources.&rdquo;</p>
+      <cite>Coaching coordinator, stakeholder</cite>
+    </blockquote>
+  </section>
+
+  <!-- More projects -->
+  <section class="container more">
+    <h2 class="h2">View more projects</h2>
+    <div class="more-grid">
+      <a class="more-card" href="meitu-localization.html">
+        <div class="media media--meitu"><img src="meitu.png" alt="Meitu app, cover for the localization research project"></div>
+        <p class="more-card-title">Guiding a Chinese photo-editing app into North America with in-depth interviews</p>
+        <div class="more-tags"><span>In-depth Interviews</span><span>Cross-cultural Research</span></div>
+      </a>
+      <a class="more-card" href="lock-ecommerce.html">
+        <div class="media media--lock"><img src="lock.jpeg" alt="Lock product, cover for the e-commerce strategy project"></div>
+        <p class="more-card-title">Informing e-commerce product and market strategy for a legacy lock brand</p>
+        <div class="more-tags"><span>Survey</span><span>Market Research</span></div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-label">Where to Find Me →</span>
+      <div class="socials">
+        <a href="mailto:chen_sixian@outlook.com" class="copy-email" data-email="chen_sixian@outlook.com" aria-label="Copy email address chen_sixian@outlook.com"><span class="copy-tip" role="status" aria-live="polite">Click to copy email</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sixian-chen-51029125a/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 邮箱图标：hover 提示可复制，点击复制地址；剪贴板不可用时退回到打开邮件客户端
+  document.querySelectorAll('.copy-email').forEach(link => {
+    const tip = link.querySelector('.copy-tip');
+    const hint = tip.textContent;
+    let timer;
+    link.addEventListener('mouseleave', () => {
+      clearTimeout(timer);
+      tip.classList.remove('show');
+      setTimeout(() => { tip.textContent = hint; }, 200);
+    });
+    link.addEventListener('click', async e => {
+      if (!navigator.clipboard) return;
+      e.preventDefault();
+      try {
+        await navigator.clipboard.writeText(link.dataset.email);
+        tip.textContent = 'Email copied!';
+      } catch {
+        tip.textContent = link.dataset.email;
+      }
+      tip.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        tip.classList.remove('show');
+        if (!link.matches(':hover')) tip.textContent = hint;
+      }, 1600);
+    });
+  });
+</script>
+<script>
+  // 手机端：把每张方法对比表按列（每种方法）转成上下排列的卡片，桌面端仍显示原表格
+  document.querySelectorAll('.method-table').forEach(table => {
+    const heads = [...table.querySelectorAll('thead th')];
+    const rows = [...table.querySelectorAll('tbody tr')];
+    const stack = document.createElement('div');
+    stack.className = 'method-stack';
+    heads.forEach((th, col) => {
+      if (th.classList.contains('dim')) return;
+      const m = document.createElement('div');
+      m.className = 'm ' + (th.classList.contains('pick') ? 'pick' : 'rest');
+      const name = document.createElement('div');
+      name.className = 'm-name';
+      name.textContent = th.textContent;
+      m.append(name);
+      rows.forEach(tr => {
+        const cell = tr.children[col];
+        const row = document.createElement('div');
+        row.className = 'm-row';
+        const dim = document.createElement('div');
+        dim.className = 'm-dim';
+        dim.textContent = tr.querySelector('th').textContent;
+        row.append(dim, ...[...cell.childNodes].map(n => n.cloneNode(true)));
+        m.append(row);
+      });
+      stack.append(m);
+    });
+    table.after(stack);
+  });
+</script>
+</body>
+</html>

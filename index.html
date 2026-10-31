@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sixian Chen · Mixed-method UX Researcher</title>
+<meta name="description" content="Mixed-method UX researcher with strengths in rapid user testing, experimentation, and market research. Previously with teams at Adobe, Kroger, and BCG.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sixian Chen · Mixed-method UX Researcher">
+<meta property="og:description" content="Mixed-method UX researcher with strengths in rapid user testing, experimentation, and market research. Previously with teams at Adobe, Kroger, and BCG.">
+<meta property="og:url" content="https://research.sixianchen.com/">
+<meta property="og:image" content="https://research.sixianchen.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Sans:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* 数值均按参考站 1440 / 390 宽度实测 */
+  :root {
+    --text: #0a0a0a;
+    --tag-text: #18181b;
+    --notes-body: rgb(26, 32, 44);
+    --heading-2: #333333;
+    --footer-text: #2d2d2d;
+    --accent: rgb(27, 97, 201);
+    --link: rgb(255, 89, 3);
+    --line: rgba(10, 10, 10, 0.1);
+    --pill-border: #f4f4f5;
+    --media-work: #e4e4e7;
+    --media-note: #f3f3f3;
+    --bg: #ffffff;
+    --max: 1120px;
+    --gutter: 24px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; }
+
+  .container {
+    max-width: calc(var(--max) + var(--gutter) * 2);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  /* 媒体占位：往 .media 里放 <img> 或 <video> 会自动铺满 */
+  .media { position: relative; overflow: hidden; }
+  .media > img, .media > video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  /* ---------- Nav ---------- */
+  .nav { position: sticky; top: 0; z-index: 10; background: var(--bg); }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 57px;
+    padding: 0 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  /* 头像：整张 avatar.png 完整显示，不裁切 */
+  .avatar { flex: none; height: 32px; }
+  .avatar > img { height: 100%; width: auto; }
+  .brand span, .nav-links {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: -0.3px;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { transition: opacity .2s; }
+  .nav-links a:hover { opacity: .55; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-top: 219px; }
+  .hero h1 {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 39px;
+    letter-spacing: -0.52px;
+    margin-bottom: 10px;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p {
+    font-size: 22px;
+    line-height: 33px;
+    letter-spacing: -0.44px;
+  }
+  .orgs { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0 0 6px; }
+  .orgs-lead { font-size: 22px; line-height: 33px; letter-spacing: -0.44px; }
+  .org {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 26.4px;
+    color: #000;
+  }
+  .hero-sm { display: none; }
+  /* BCG 图标的字母贴着图片边缘，加同色底和内边距，避免看起来被切掉 */
+  .org-logo.org-logo--bcg { background: rgb(3, 82, 45); padding: 2.5px; }
+  .org-logo--bcg > img { object-fit: contain; }
+  .org-logo {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 2px;
+    background: var(--media-work);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  }
+
+  /* ---------- Work grid ---------- */
+  .work {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 105px 32px;
+    padding-top: 220px;
+  }
+  .card { display: block; }
+  .card .media {
+    aspect-ratio: 544 / 295;
+    border-radius: 26px;
+    background: var(--media-work);
+  }
+  .card .media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--pill-border);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  /* hover：图片微缩 + 暗色遮罩淡入 + 标题变蓝，均 300ms ease-out */
+  .card .media { transition: transform .3s ease-out; }
+  .card .media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.14);
+    opacity: 0;
+    transition: opacity .3s ease-out;
+    pointer-events: none;
+  }
+  .card:hover .media { transform: scale(.99); }
+  .card:hover .media::before { opacity: 1; }
+  .card-title { transition: color .3s ease-out; }
+  .card:hover .card-title { color: rgb(37, 99, 235); }
+  /* 封面图主体缩小：图片按比例收进卡片，底色补齐四周 */
+  .media--iu { background: #fff !important; }
+  .media--meitu { background: #fff !important; }
+  .media--iu > img { object-fit: contain; transform: scale(.62); }
+  .media--lock { background: linear-gradient(135deg, rgb(44, 77, 193), rgb(97, 124, 237)) !important; }
+  .media--lock > img { transform: scale(.8); -webkit-mask-image: radial-gradient(ellipse 50% 50% at center, #000 82%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at center, #000 82%, transparent 100%); }
+  .card-body { padding: 6px 13px 0; }
+  .card-title {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24.75px;
+    letter-spacing: 0.09px;
+    margin-bottom: 8px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 10px;
+    border: 1px solid var(--pill-border);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--tag-text);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 17.875px;
+    letter-spacing: 0.065px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Research notes ---------- */
+  .notes { padding-top: 199px; }
+  .notes h2 {
+    font-family: "Instrument Sans", "Inter", sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 33.6px;
+    letter-spacing: -0.84px;
+    color: var(--heading-2);
+    margin-bottom: 10px;
+  }
+  .notes-intro {
+    font-size: 17px;
+    line-height: 27.2px;
+    letter-spacing: -0.34px;
+    color: var(--notes-body);
+  }
+  .notes-intro a { color: var(--link); font-weight: 600; }
+  .notes-intro a:hover { text-decoration: underline; }
+
+  /* Toolbox：方法卡片网格，点击打开 mini case study 弹窗 */
+  .toolbox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 68px;
+  }
+  .note { display: block; cursor: pointer; }
+  .note .media {
+    aspect-ratio: 16 / 10;
+    border-radius: 16px;
+    background: var(--media-note);
+    transition: transform .3s ease-out;
+  }
+  .note .media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.14);
+    opacity: 0;
+    transition: opacity .3s ease-out;
+    pointer-events: none;
+  }
+  .note:hover .media { transform: scale(.99); }
+  /* 方法封面：白底细边框，扁平色块插画 + 方法名 */
+  .note .media.cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #fff;
+  }
+  .note .media.cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--line);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .cover-art { width: 58%; height: auto; }
+  .cover-label { font-size: 15px; font-weight: 500; letter-spacing: -0.2px; color: var(--tag-text); }
+  .note:hover .media::before { opacity: 1; }
+  .note .card-body { padding: 14px 8px 0; }
+  .note .card-title {
+    font-size: 16px;
+    line-height: 22.4px;
+    letter-spacing: -0.32px;
+    margin-bottom: 10px;
+    transition: color .3s ease-out;
+  }
+  .note:hover .card-title { color: rgb(37, 99, 235); }
+
+  /* 弹窗：左图右文 */
+  .case-modal {
+    width: min(1040px, calc(100% - 32px));
+    max-width: none;
+    max-height: min(640px, calc(100vh - 64px));
+    margin: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 20px;
+    background: #fff;
+    color: var(--text);
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
+  }
+  .case-modal::backdrop { background: rgba(10, 10, 10, 0.45); backdrop-filter: blur(2px); }
+  .case-modal[open] { animation: modal-in .25s ease-out; }
+  @keyframes modal-in { from { opacity: 0; transform: translateY(12px) scale(.98); } }
+  .case-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: min(640px, calc(100vh - 64px));
+  }
+  .case-media { position: relative; background: var(--media-note); }
+  .case-media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .case-media--fit > img { inset: 32px; width: calc(100% - 64px); height: calc(100% - 64px); object-fit: contain; }
+  /* 问卷示例图：仿问卷界面，5 题 5 点量表；用 HTML 画，任何屏幕都清晰 */
+  .case-media--mock { display: flex; align-items: center; justify-content: center; padding: 32px; overflow: hidden; }
+  .case-media--mock::before, .case-media--mock::after { content: ""; position: absolute; border-radius: 50%; background: #cfe3fb; }
+  .case-media--mock::before { width: 360px; height: 360px; top: -60px; right: -90px; }
+  .case-media--mock::after { width: 300px; height: 140px; bottom: -70px; left: 40px; }
+  .mock { position: relative; z-index: 1; width: 100%; max-width: 420px; padding: 24px; border-radius: 16px; background: #fff; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08); color: var(--tag-text); }
+  .mock-q { font-size: 16px; font-weight: 600; line-height: 1.3; letter-spacing: -0.02em; }
+  .mock-help { margin-top: 4px; font-size: 12px; color: rgb(107, 114, 128); }
+  .mock-item { margin-top: 14px; }
+  .mock-help + .mock-item { margin-top: 18px; }
+  .mock-label { font-size: 12px; line-height: 1.35; }
+  .mock-row { display: flex; align-items: center; gap: 14px; margin-top: 8px; }
+  .mock-track { position: relative; flex: 1; height: 6px; border-radius: 3px; background: #e7e7ea; }
+  .mock-track::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: calc((var(--v) - 1) * 25%); border-radius: 3px; background: #18181b; }
+  .mock-track::after { content: ""; position: absolute; top: 50%; left: calc((var(--v) - 1) * 25%); width: 16px; height: 16px; border-radius: 50%; background: #18181b; transform: translate(-50%, -50%); }
+  .mock-ticks { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; }
+  .mock-ticks i { width: 4px; height: 4px; border-radius: 50%; background: #bdbdc2; }
+  .mock-val { width: 20px; text-align: right; font-size: 12px; font-weight: 600; }
+  .mock-next { display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; padding: 9px 16px; border-radius: 6px; background: #18181b; color: #fff; font-size: 12px; font-weight: 600; }
+  .case-content { padding: 48px 44px; overflow-y: auto; }
+  .case-content .tag { display: inline-block; }
+  .case-content h3 {
+    margin: 16px 0 28px;
+    font-family: "Instrument Sans", "Inter", sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.84px;
+    color: var(--heading-2);
+  }
+  .case-content h4 {
+    margin-top: 32px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: rgb(107, 114, 128);
+  }
+  .case-content p {
+    margin-top: 6px;
+    font-size: 16px;
+    line-height: 25.6px;
+    letter-spacing: -0.32px;
+    color: var(--notes-body);
+  }
+  .case-content ul {
+    margin-top: 6px;
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 25.6px;
+    letter-spacing: -0.32px;
+    color: var(--notes-body);
+  }
+  .case-content li + li { margin-top: 6px; }
+  .case-content ul.no-bullet { list-style: none; }
+  /* 重点词：主色 + 加粗（与 about 页一致） */
+  .case-content strong { font-weight: 600; color: var(--accent); }
+  /* 提示卡片：中性浅灰底、圆角，不加色条，用来把 Why this method 这类段落和正文区分开 */
+  .case-content .callout {
+    margin-top: 32px;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: #f4f4f5;
+  }
+  .case-content .callout h4 { margin-top: 0; }
+  .case-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0 1px var(--line);
+    color: var(--text);
+    cursor: pointer;
+  }
+  .case-close svg { width: 18px; height: 18px; }
+
+  /* ---------- Footer ---------- */
+  .footer { padding-top: 205px; }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+  }
+  .footer-label {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 15px;
+    letter-spacing: -0.15px;
+    color: var(--footer-text);
+  }
+  .socials { display: flex; gap: 28px; color: rgb(8, 8, 8); }
+  .socials a { display: flex; transition: opacity .2s; }
+  /* 邮箱图标：点击复制地址，上方提示 */
+  .copy-email { position: relative; }
+  .copy-tip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #0a0a0a;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+  }
+  .copy-email:hover .copy-tip, .copy-email:focus-visible .copy-tip, .copy-tip.show { opacity: 1; }
+  .socials a.copy-email:hover { opacity: 1; }
+  .copy-email svg { transition: opacity .2s; }
+  .copy-email:hover svg { opacity: .5; }
+  .socials a:hover { opacity: .5; }
+  .socials svg { width: 26px; height: 26px; }
+
+  /* ---------- Phone (按 390 宽实测) ---------- */
+  @media (min-width: 810px) and (max-width: 1099px) {
+    .toolbox { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 809px) {
+    .nav-inner { height: 56px; padding-right: 18px; }
+    .nav-links { font-size: 14px; line-height: 17px; letter-spacing: normal; gap: 0; }
+    .nav-links a:nth-child(1) { margin-right: 43px; }
+    .nav-links a:nth-child(2) { margin-right: 30px; }
+    .brand span { display: none; }
+
+    .hero { padding-top: 168px; }
+    .hero h1 { font-size: 20px; line-height: 30px; letter-spacing: -0.4px; margin-bottom: 16px; }
+    .hero p { font-size: 14px; line-height: 21px; letter-spacing: normal; }
+    .hero-lg { display: none; }
+    .hero-sm { display: block; }
+    .hero-sm .org-logo { display: inline-block; width: 18px; height: 18px; vertical-align: -3px; }
+    .hero-sm .org-logo + .org-logo { margin-left: 8px; }
+    .hero-sm .org-logo.org-logo--bcg { padding: 2px; }
+
+    .work { grid-template-columns: 1fr; gap: 0; padding-top: 168px; }
+    .card { height: 390.67px; }
+    .card .media { aspect-ratio: 342 / 185; }
+
+    .notes { padding-top: 97px; }
+    .notes h2 { font-size: 24px; line-height: 31.68px; letter-spacing: -0.72px; }
+    .notes-intro { font-size: 14px; line-height: 22.4px; letter-spacing: -0.28px; }
+    .toolbox { grid-template-columns: 1fr; gap: 32px; margin-top: 40px; }
+    .case-modal { max-height: calc(100vh - 32px); overflow-y: auto; }
+    .case-layout { grid-template-columns: 1fr; height: auto; }
+    .case-media { aspect-ratio: 4 / 3; }
+    .case-media--mock { aspect-ratio: auto; padding: 28px 20px; }
+    .case-content { padding: 28px 24px 32px; overflow: visible; }
+    .case-content h3 { font-size: 22px; letter-spacing: -0.66px; margin-bottom: 20px; }
+    .case-content p, .case-content ul { font-size: 14px; line-height: 22.4px; letter-spacing: normal; }
+
+    .footer { padding-top: 132px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; padding: 40px 0; }
+  }
+</style>
+<script src="analytics.js" defer></script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="./" class="brand">
+        <div class="avatar"><img src="avatar.png" alt="Sixian Chen"></div>
+        <span>Sixian Chen</span>
+      </a>
+      <nav class="nav-links">
+        <a href="./">Work</a>
+        <a href="about.html">About</a>
+        <a href="https://drive.google.com/file/d/1PsuJZk3iySAaY9Ku3GlWY91uNizDfZkY/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero container">
+    <h1>I'm a <em>Mixed-method UX Researcher</em> with strengths in rapid user testing, experimentation, and market research</h1>
+    <p class="hero-sm">Previously with teams at <span class="org-logo media"><img src="assets/logos/adobe.png" alt="Adobe"></span><span class="org-logo media"><img src="assets/logos/kroger.jpg" alt="Kroger"></span><span class="org-logo media org-logo--bcg"><img src="assets/logos/bcg.png" alt="BCG"></span>, reducing the cost of <span style="white-space: nowrap">decision-making</span> and shaping product and business strategy for Fortune 500 clients</p>
+    <div class="orgs hero-lg">
+      <span class="orgs-lead">Previously with teams at</span>
+      <span class="org"><span class="org-logo media"><img src="assets/logos/adobe.png" alt="Adobe"></span>Adobe,</span>
+      <span class="org"><span class="org-logo media"><img src="assets/logos/kroger.jpg" alt="Kroger"></span>Kroger,</span>
+      <span class="org">and <span class="org-logo media org-logo--bcg"><img src="assets/logos/bcg.png" alt="BCG"></span>BCG,</span>
+    </div>
+    <p class="hero-lg">reducing the cost of <span style="white-space: nowrap">decision-making</span> and shaping product and business strategy for Fortune 500 clients</p>
+  </section>
+
+  <section class="work container">
+    <a class="card" href="iu-peer-coach.html">
+      <div class="media media--iu"><img src="iu-marketing-lockup.jpg" alt="Indiana University logo, cover for the bounce rate research project"></div>
+      <div class="card-body">
+        <h3 class="card-title">Resolving a high bounce rate with rapid mixed-methods research</h3>
+        <div class="tags"><span class="tag">Rapid Research</span><span class="tag">Mixed Methods</span><span class="tag">GA4</span><span class="tag">Usability Testing</span></div>
+      </div>
+    </a>
+    <a class="card" href="meitu-localization.html">
+      <div class="media media--meitu"><img src="meitu.png" alt="Meitu app, cover for the localization research project"></div>
+      <div class="card-body">
+        <h3 class="card-title">Guiding a Chinese photo-editing app into North America with in-depth interviews</h3>
+        <div class="tags"><span class="tag">In-depth Interviews</span><span class="tag">Cross-cultural Research</span></div>
+      </div>
+    </a>
+    <a class="card" href="lock-ecommerce.html">
+      <div class="media media--lock"><img src="lock.jpeg" alt="Lock product, cover for the e-commerce strategy project"></div>
+      <div class="card-body">
+        <h3 class="card-title">Informing e-commerce product and market strategy for a legacy lock brand</h3>
+        <div class="tags"><span class="tag">Quantitative Research</span><span class="tag">Market Research</span><span class="tag">Segmentation Analysis</span></div>
+      </div>
+    </a>
+  </section>
+
+  <section class="notes">
+    <div class="container">
+      <h2>My Research Toolbox</h2>
+      <p class="notes-intro">Each card is a mini case study: a real product question, the method I chose to answer it, and what changed as a result. Click a card to see how I put that method to work.</p>
+    </div>
+    <div class="container">
+      <div class="toolbox" id="toolbox">
+        <a class="note" href="#" aria-haspopup="dialog">
+          <div class="media cover" style="background:#FF4A1C">
+            <svg class="cover-art" viewBox="0 0 240 140" aria-hidden="true">
+              <rect x="52" y="14" width="136" height="104" rx="10" fill="#ff9277"/>
+              <rect x="52" y="62" width="136" height="6" fill="#111111"/>
+              <rect x="52" y="112" width="136" height="6" rx="3" fill="#111111"/>
+              <rect x="64" y="34" width="18" height="28" rx="3" fill="#fff"/>
+              <rect x="86" y="26" width="18" height="36" rx="3" fill="#111111"/>
+              <rect x="108" y="38" width="24" height="24" rx="3" fill="#fff"/>
+              <rect x="138" y="32" width="18" height="30" rx="3" fill="none" stroke="#111111" stroke-width="2" stroke-dasharray="4 3"/>
+              <rect x="160" y="40" width="16" height="22" rx="3" fill="#fff"/>
+              <rect x="64" y="86" width="22" height="26" rx="3" fill="#111111"/>
+              <rect x="90" y="80" width="18" height="32" rx="3" fill="#fff"/>
+              <rect x="112" y="90" width="26" height="22" rx="3" fill="#fff"/>
+              <rect x="142" y="84" width="18" height="28" rx="3" fill="#111111"/>
+              <path d="M30 82h10l8 30h30l6-22H44" fill="none" stroke="#111111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="54" cy="124" r="5" fill="#111111"/>
+              <circle cx="76" cy="124" r="5" fill="#111111"/>
+              <circle cx="190" cy="26" r="17" fill="#111111"/>
+              <path d="M180 26s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="190" cy="26" r="2.6" fill="#fff"/>
+            </svg>
+            <span class="cover-label">Contextual Inquiry</span>
+          </div>
+          <div class="card-body"><h3 class="card-title">Observing how Instacart shoppers choose substitutes for out-of-stock items</h3></div>
+          <!-- 弹窗内容：左边图片，右边文字。图片放进 case-media 里的 <img> -->
+          <template class="case">
+            <div class="case-media case-media--fit"><img src="contextualinquiry-phones.png" alt="Shopper app redesign: automated best match, same-shelf replacement options, and a notice that the customer may be busy"></div>
+            <div class="case-content">
+              <span class="tag">Contextual Inquiry</span>
+              <h3>Observing how Instacart shoppers choose substitutes for out-of-stock items</h3>
+              <h4>Research question</h4>
+              <p>When an item is out of stock, how do Instacart shoppers decide what to substitute?</p>
+              <div class="callout">
+                <h4>Why this method</h4>
+                <p>Direct observation captures the nuances behind each choice and gives a more objective picture, especially when the choice may pit the shopper&rsquo;s interests against the customer&rsquo;s.</p>
+              </div>
+              <h4>Recruiting</h4>
+              <p>Placed real Instacart orders and asked each assigned shopper whether they would be willing to take part in the study.</p>
+              <h4>Insights</h4>
+              <ul>
+                <li>When time allows, shoppers prefer to check with the customer rather than decide on their own</li>
+                <li>Efficiency comes first: shoppers don&rsquo;t want to wait for a reply or walk extra aisles to find a substitute</li>
+              </ul>
+              <h4>Impact</h4>
+              <p><strong>Informed three design decisions</strong> in the redesign of the substitution feature:</p>
+              <ul>
+                <li>Suggest a best match based on the customer&rsquo;s past purchases, prioritizing the same brand or flavor</li>
+                <li>Show replacement options on the same shelf or aisle first</li>
+                <li>Tell shoppers when the customer has pre-approved replacements and may not reply quickly</li>
+              </ul>
+            </div>
+          </template>
+        </a>
+        <a class="note" href="#" aria-haspopup="dialog">
+          <div class="media cover" style="background:#5D57C0">
+            <svg class="cover-art" viewBox="0 0 240 140" aria-hidden="true">
+              <circle cx="40" cy="70" r="12" fill="#111111"/>
+              <path d="M52 70h10c8 0 10-38 20-38h6M62 70c8 0 10 38 20 38h6" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+              <rect x="92" y="12" width="58" height="42" rx="8" fill="#9e9ad9"/>
+              <rect x="100" y="21" width="30" height="6" rx="3" fill="#111111"/>
+              <rect x="100" y="34" width="22" height="10" rx="5" fill="#111111"/>
+              <text x="142" y="27" text-anchor="end" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#111111">A</text>
+              <rect x="92" y="86" width="58" height="42" rx="8" fill="#9e9ad9"/>
+              <rect x="100" y="95" width="30" height="6" rx="3" fill="#111111"/>
+              <rect x="100" y="108" width="36" height="10" rx="5" fill="#111111"/>
+              <text x="142" y="101" text-anchor="end" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#111111">B</text>
+              <rect x="160" y="28" width="22" height="10" rx="5" fill="#111111"/>
+              <rect x="160" y="102" width="50" height="10" rx="5" fill="#111111"/>
+              <circle cx="206" cy="24" r="15" fill="#111111"/>
+              <path d="M199 24l5 5 9-10" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="cover-label" style="color:#fff">A/B Testing</span>
+          </div>
+          <div class="card-body"><h3 class="card-title">Testing whether a student-focused homepage still needed its staff CTAs</h3><div class="tags"><span class="tag">Rapid Research</span><span class="tag">Stakeholder Alignment</span></div></div>
+          <!-- 弹窗内容：左边图片，右边文字。图片放进 case-media 里的 <img> -->
+          <template class="case">
+            <div class="case-media case-media--fit"><img src="abtesting.png" alt="Homepage version A and version B, differing only in their CTAs"></div>
+            <div class="case-content">
+              <span class="tag">A/B Testing</span>
+              <h3>Testing whether a student-focused homepage still needed its staff CTAs</h3>
+              <h4>Context</h4>
+              <p>The new homepage design rewrote its call-to-action (CTA) copy, and the team disagreed on what to keep:</p>
+              <ul class="no-bullet">
+                <li><strong>Designer:</strong> students are now the primary users, so the CTAs should speak to them</li>
+                <li><strong>Executives:</strong> no harm in keeping the original staff-facing CTAs as well</li>
+              </ul>
+              <h4>Research question</h4>
+              <p>How many CTAs should the homepage show: only the student-facing ones, or the staff-facing ones too?</p>
+              <div class="callout">
+                <h4>Why this method</h4>
+                <p>The question came down to a single variable, the CTA set, so I could hold everything else on the page constant and compare the two versions directly.</p>
+              </div>
+              <h4>Participants &amp; timeline</h4>
+              <p>10 students and 5 staff members, over 2 days</p>
+              <h4>Insights</h4>
+              <ul>
+                <li>The staff-facing CTA confused students: they thought they had landed on the wrong website</li>
+                <li>Staff members rarely used the CTAs, since they usually reach their target pages through browser bookmarks or by typing the URL</li>
+              </ul>
+              <h4>Impact</h4>
+              <p>The test results <strong>brought stakeholders into agreement</strong> on the design decision, and the team shipped the version with a single CTA.</p>
+            </div>
+          </template>
+        </a>
+        <a class="note" href="#" aria-haspopup="dialog">
+          <div class="media cover" style="background:#5BD1AC">
+            <svg class="cover-art" viewBox="0 0 240 140" aria-hidden="true">
+              <rect x="34" y="16" width="172" height="30" rx="8" fill="#9de3cd"/>
+              <rect x="34" y="56" width="172" height="30" rx="8" fill="#9de3cd"/>
+              <rect x="34" y="96" width="172" height="30" rx="8" fill="#9de3cd"/>
+              <path d="M34 51h172" stroke="#111111" stroke-width="1.6" stroke-dasharray="5 4"/>
+              <path d="M66 31h42M126 31h42M66 31v40M146 31v40M146 71v40M86 71h40M106 111h20M86 71v40" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+              <rect x="46" y="23" width="40" height="16" rx="5" fill="#fff"/>
+              <rect x="106" y="23" width="40" height="16" rx="5" fill="#fff"/>
+              <rect x="166" y="23" width="28" height="16" rx="5" fill="#fff"/>
+              <rect x="46" y="63" width="40" height="16" rx="5" fill="#111111"/>
+              <rect x="126" y="63" width="40" height="16" rx="5" fill="#111111"/>
+              <rect x="126" y="103" width="40" height="16" rx="5" fill="#111111"/>
+              <rect x="66" y="103" width="40" height="16" rx="5" fill="#fff"/>
+            </svg>
+            <span class="cover-label">Service Blueprint</span>
+          </div>
+          <div class="card-body"><h3 class="card-title">Mapping onsite returns for Kroger pickup orders across two companies and four systems</h3></div>
+          <!-- 弹窗内容：左边图片，右边文字。图片放进 case-media 里的 <img> -->
+          <template class="case">
+            <div class="case-media case-media--fit"><img src="kroger_blueprint.png" alt="Kroger service blueprint"></div>
+            <div class="case-content">
+              <span class="tag">Service Blueprint</span>
+              <h3>Mapping onsite returns for Kroger pickup orders across two companies and four systems</h3>
+              <h4>Timeline</h4>
+              <p>3 weeks</p>
+              <h4>Context</h4>
+              <p>Kroger wanted pickup customers to be able to return or exchange items onsite, right at pickup. I researched which use cases this would need to cover and prioritized them by feasibility.</p>
+              <h4>Assumptions</h4>
+              <ul>
+                <li>The partnership limits data sharing, so not every need can be met and we must prioritize</li>
+                <li>Staff at the two companies have no informal channel and pass data through the systems only</li>
+              </ul>
+              <h4>Method</h4>
+              <ul>
+                <li>Contextual inquiry</li>
+                <li>Stakeholder interviews</li>
+                <li>Desk research</li>
+              </ul>
+              <div class="callout">
+                <h4>Why a service blueprint</h4>
+                <p>The question spanned two companies, four systems, and both the frontstage experience and backstage data flows. A blueprint put it all on one map and showed where handoffs would break an onsite return.</p>
+              </div>
+              <h4>Outcome</h4>
+              <p><strong>Identified 12 opportunities and prioritized 4 of them</strong> based on technical feasibility, data availability, user experience, and the competitive landscape.</p>
+            </div>
+          </template>
+        </a>
+        <a class="note" href="#" aria-haspopup="dialog">
+          <div class="media cover" style="background:#5050F0">
+            <svg class="cover-art" viewBox="0 0 240 140" aria-hidden="true">
+              <rect x="78" y="8" width="84" height="26" rx="8" fill="#111111"/>
+              <rect x="66" y="16" width="108" height="26" rx="10" fill="#9696f6" stroke="#fff" stroke-width="3"/>
+              <rect x="54" y="26" width="132" height="98" rx="12" fill="#9696f6" stroke="#fff" stroke-width="3"/>
+              <rect x="70" y="44" width="76" height="8" rx="4" fill="#111111"/>
+              <rect x="70" y="58" width="50" height="8" rx="4" fill="#fff"/>
+              <circle cx="80" cy="98" r="8" fill="#fff"/>
+              <circle cx="100" cy="98" r="8" fill="#fff"/>
+              <circle cx="120" cy="98" r="8" fill="#fff"/>
+              <circle cx="140" cy="98" r="8" fill="#111111"/>
+              <circle cx="160" cy="98" r="8" fill="#fff"/>
+              <circle cx="184" cy="30" r="17" fill="#111111"/>
+              <path d="M172 31h6l3-7 5 13 3-6h5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="cover-label" style="color:#fff">Pulse Survey</span>
+          </div>
+          <div class="card-body"><h3 class="card-title">Uncovering what drove low customer satisfaction at a utility company</h3><div class="tags"><span class="tag">Qualtrics</span></div></div>
+          <!-- 弹窗内容：左边图片，右边文字。图片放进 case-media 里的 <img> -->
+          <template class="case">
+            <div class="case-media case-media--fit"><img src="pulsesurvey.png" alt="Pulse survey"></div>
+            <div class="case-content">
+              <span class="tag">Pulse Survey</span>
+              <h3>Uncovering what drove low customer satisfaction at a utility company</h3>
+              <h4>Team</h4>
+              <p>Customer Experience Intern (me)<br>Senior UX Researcher<br>Product Owner<br>Data Scientist</p>
+              <h4>Method</h4>
+              <p>Large-scale pulse survey (short questionnaires sent at a high frequency) targeting 40K customers over 12 months</p>
+              <div class="callout">
+                <h4>Why this method</h4>
+                <p>To get findings that generalize. Compared with a longitudinal survey, it split customers into 12 equivalent sample groups, so we could collect data more often while contacting each customer less.</p>
+              </div>
+              <h4>What I did</h4>
+              <ul>
+                <li>Quality-checked the questionnaire so no question was ambiguous and no answer option was missing</li>
+                <li>Built it in <strong>Qualtrics</strong>, using skip logic to split it into four sub-surveys for different participant groups</li>
+                <li>Imported personalized survey links into <strong>Salesforce</strong> and wrote the recruiting email</li>
+                <li>Built a Qualtrics dashboard to track results as responses came in</li>
+              </ul>
+            </div>
+          </template>
+        </a>
+        <a class="note" href="#" aria-haspopup="dialog">
+          <div class="media cover" style="background:#F7CB15">
+            <svg class="cover-art" viewBox="0 0 240 140" aria-hidden="true">
+              <rect x="40" y="18" width="150" height="108" rx="12" fill="#fae073"/>
+              <rect x="56" y="34" width="64" height="8" rx="4" fill="#111111"/>
+              <rect x="60" y="78" width="18" height="34" rx="4" fill="#fff"/>
+              <rect x="88" y="62" width="18" height="50" rx="4" fill="#111111"/>
+              <rect x="116" y="88" width="18" height="24" rx="4" fill="#fff"/>
+              <rect x="144" y="54" width="18" height="58" rx="4" fill="#111111"/>
+              <rect x="54" y="112" width="116" height="3" rx="1.5" fill="#111111"/>
+              <circle cx="190" cy="30" r="17" fill="#111111"/>
+              <path d="M182 26v-4h4M194 22h4v4M198 34v4h-4M186 38h-4v-4" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="cover-label">Cross-sectional Survey</span>
+          </div>
+          <div class="card-body"><h3 class="card-title">Designing a stratified sample and validating a new scale from scratch</h3><div class="tags"><span class="tag">Significance Testing</span><span class="tag">Regression Analysis</span></div></div>
+          <!-- 弹窗内容：左边图片，右边文字。图片放进 case-media 里的 <img> -->
+          <template class="case">
+            <div class="case-media case-media--mock">
+              <div class="mock" role="img" aria-label="Example questionnaire page: five items from the social boldness scale, each rated on a 5-point scale from strongly disagree to strongly agree">
+                <div class="mock-q">4. How much do you agree with the following statements?</div>
+                <div class="mock-help">1 = strongly disagree, 5 = strongly agree</div>
+                <div class="mock-item">
+                  <div class="mock-label">I often liven up the room, wherever I am</div>
+                  <div class="mock-row"><div class="mock-track" style="--v: 4"><span class="mock-ticks"><i></i><i></i><i></i><i></i><i></i></span></div><span class="mock-val">4</span></div>
+                </div>
+                <div class="mock-item">
+                  <div class="mock-label">I&rsquo;d call out a friend&rsquo;s name loudly in a public place</div>
+                  <div class="mock-row"><div class="mock-track" style="--v: 3"><span class="mock-ticks"><i></i><i></i><i></i><i></i><i></i></span></div><span class="mock-val">3</span></div>
+                </div>
+                <div class="mock-item">
+                  <div class="mock-label">I can start a conversation with a stranger I meet at school or work</div>
+                  <div class="mock-row"><div class="mock-track" style="--v: 4"><span class="mock-ticks"><i></i><i></i><i></i><i></i><i></i></span></div><span class="mock-val">4</span></div>
+                </div>
+                <div class="mock-item">
+                  <div class="mock-label">I wouldn&rsquo;t feel awkward having staff sing to me on my birthday in a busy restaurant</div>
+                  <div class="mock-row"><div class="mock-track" style="--v: 2"><span class="mock-ticks"><i></i><i></i><i></i><i></i><i></i></span></div><span class="mock-val">2</span></div>
+                </div>
+                <div class="mock-item">
+                  <div class="mock-label">When no one answers the teacher&rsquo;s question, I speak up</div>
+                  <div class="mock-row"><div class="mock-track" style="--v: 5"><span class="mock-ticks"><i></i><i></i><i></i><i></i><i></i></span></div><span class="mock-val">5</span></div>
+                </div>
+                <span class="mock-next">Next <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </div>
+            </div>
+            </div>
+            </div>
+            <div class="case-content">
+              <span class="tag">Cross-sectional Survey</span>
+              <h3>Designing a stratified sample and validating a new scale from scratch</h3>
+              <h4>Context</h4>
+              <p>A course project for social survey methods.</p>
+              <h4>Method</h4>
+              <p>Survey</p>
+              <ul>
+                <li>Sampling: stratified random sampling, nonresponse weighting</li>
+                <li>Statistics: factor analysis, reliability analysis (Cronbach&rsquo;s &alpha;), correlation, multiple linear regression, mediation analysis</li>
+              </ul>
+              <h4>Sampling</h4>
+              <ul>
+                <li>Population: undergraduates at one university</li>
+                <li>Strata: year &times; discipline (humanities and social sciences, STEM, medicine)</li>
+                <li>Target sample: 120 (20 per variable &times; 6 variables)</li>
+                <li>Invitations: 400 (150 / 154 / 96 by discipline), allocated by enrollment and drawn at random within each stratum</li>
+                <li>Responses: 134 (35%)</li>
+                <li>Nonresponse weights by discipline: 3.95 / 2.96 / 2.18 (response rates 25% / 34% / 46%)</li>
+              </ul>
+              <h4>Statistics</h4>
+              <ul>
+                <li>New 10-item social boldness scale: factor loadings 0.82 to 0.84, &alpha; = 0.84</li>
+                <li>Established scales (social anxiety, extraversion, fear of negative evaluation, self-esteem, attachment): &alpha; = 0.72 to 0.94</li>
+                <li>Regression: extraversion and fear of negative evaluation predicted social boldness (R&sup2; = .50, p &lt; .001); extraversion predicted social anxiety (R&sup2; = .21, p &lt; .001)</li>
+                <li>Mediation: fear of negative evaluation affected social boldness through closeness and dependence in attachment; extraversion affected it through dependence</li>
+              </ul>
+              <h4>Sampling bias</h4>
+              <p>To raise the response rate we offered personalized results reports, which likely drew students already interested in psychology, so the sample may over-represent them.</p>
+            </div>
+          </template>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-label">Where to Find Me →</span>
+      <div class="socials">
+        <a href="mailto:chen_sixian@outlook.com" class="copy-email" data-email="chen_sixian@outlook.com" aria-label="Copy email address chen_sixian@outlook.com"><span class="copy-tip" role="status" aria-live="polite">Click to copy email</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sixian-chen-51029125a/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<dialog class="case-modal" id="case-modal" aria-label="Mini case study">
+  <button class="case-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <div class="case-layout"></div>
+</dialog>
+
+<script>
+  // Toolbox：点击卡片，把卡片里 <template class="case"> 的内容放进弹窗
+  const modal = document.getElementById('case-modal');
+  const layout = modal.querySelector('.case-layout');
+  const closeModal = () => modal.close();
+  document.querySelectorAll('#toolbox .note').forEach(card => {
+    card.addEventListener('click', e => {
+      e.preventDefault();
+      layout.replaceChildren(card.querySelector('template.case').content.cloneNode(true));
+      modal.showModal();
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  modal.querySelector('.case-close').addEventListener('click', closeModal);
+  // 点遮罩关闭
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  modal.addEventListener('close', () => { document.body.style.overflow = ''; });
+</script>
+<script>
+  // 邮箱图标：hover 提示可复制，点击复制地址；剪贴板不可用时退回到打开邮件客户端
+  document.querySelectorAll('.copy-email').forEach(link => {
+    const tip = link.querySelector('.copy-tip');
+    const hint = tip.textContent;
+    let timer;
+    link.addEventListener('mouseleave', () => {
+      clearTimeout(timer);
+      tip.classList.remove('show');
+      setTimeout(() => { tip.textContent = hint; }, 200);
+    });
+    link.addEventListener('click', async e => {
+      if (!navigator.clipboard) return;
+      e.preventDefault();
+      try {
+        await navigator.clipboard.writeText(link.dataset.email);
+        tip.textContent = 'Email copied!';
+      } catch {
+        tip.textContent = link.dataset.email;
+      }
+      tip.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        tip.classList.remove('show');
+        if (!link.matches(':hover')) tip.textContent = hint;
+      }, 1600);
+    });
+  });
+</script>
+</body>
+</html>
