@@ -342,6 +342,10 @@
   }
   .case-content li + li { margin-top: 6px; }
   .case-content ul.no-bullet { list-style: none; }
+  /* 弹窗里的外链按钮（如 PPT 导出的 PDF），样式同问卷示例图里的 Next 按钮 */
+  .case-link { display: inline-flex; align-items: center; gap: 8px; margin-top: -8px; padding: 10px 16px; border-radius: 8px; background: #18181b; color: #fff; font-size: 14px; font-weight: 600; transition: background .2s ease-out; }
+  .case-link:hover { background: var(--accent); }
+  .case-link + h4 { margin-top: 28px; }
   /* 重点词：主色 + 加粗（与 about 页一致） */
   .case-content strong { font-weight: 600; color: var(--accent); }
   /* 提示卡片：中性浅灰底、圆角，不加色条，用来把 Why this method 这类段落和正文区分开 */
@@ -760,11 +764,10 @@
                 <span class="mock-next">Next <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
               </div>
             </div>
-            </div>
-            </div>
             <div class="case-content">
               <span class="tag">Cross-sectional Survey</span>
               <h3>Designing a stratified sample and validating a new scale from scratch</h3>
+              <a class="case-link" href="cross-sectional-survey.pdf" target="_blank" rel="noopener">View slides (PDF) <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
               <h4>Context</h4>
               <p>A course project for social survey methods.</p>
               <h4>Method</h4>

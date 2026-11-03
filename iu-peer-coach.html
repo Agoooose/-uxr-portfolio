@@ -97,7 +97,7 @@
     font-weight: 600;
     line-height: 1.1;
     letter-spacing: -0.04em;
-    color: var(--accent);
+    color: var(--heading);
   }
   .eyebrow {
     font-size: 14px;
@@ -140,6 +140,7 @@
   .h2 + .body, .eyebrow + .body { margin-top: 10px; }
   .h3 + .body, .eyebrow + .h3 { margin-top: 16px; }
   .h4 + .body { margin-top: 10px; }
+  .wide-media + .body { margin-top: 40px; }
 
   /* ---------- Intro: 标题 + 基本信息 + TL;DR ---------- */
   .intro { padding-top: 56px; }
@@ -150,6 +151,36 @@
     margin-top: 56px;
   }
   .fact-full { grid-column: 1 / -1; }
+  /* Scoping 下的"如果现在有 AI"卡片：浅灰底，标题深色，只有星标用主色蓝色 */
+  .ai-note { margin-top: 24px; padding: 20px 24px; border-radius: 12px; background: #f4f4f5; }
+  .ai-label { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--heading); }
+  .ai-label svg { width: 16px; height: 16px; flex: none; color: #1B61C9; }
+  .ai-label + .body { margin-top: 6px; }
+  .ai-list { margin-top: 8px; padding-left: 20px; font-size: 17px; line-height: 27.2px; letter-spacing: -0.34px; color: var(--body); }
+  .ai-list li + li { margin-top: 4px; }
+  .ai-em { font-weight: 600; color: #1B61C9; }
+  .tl + .ai-note { margin-top: 48px; }
+  /* 大号数字行：不用卡片，三列大字 + 细竖线分隔，排版语言同 Key Insights */
+  .bigstats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 40px; }
+  .bigstats > div { padding: 4px 24px; border-left: 1px solid var(--line); }
+  .bigstats > div:first-child { padding-left: 0; border-left: 0; }
+  .bigstat-num { font-size: 56px; font-weight: 500; line-height: 1; letter-spacing: -0.04em; color: var(--accent); }
+  .bigstat-num--neutral { color: var(--heading); }
+  .bigstat-num--bad { color: #E5533D; }
+  .bigstat-label { margin-top: 10px; font-size: 16px; color: var(--body); }
+  .bigstats + .wide-media { margin-top: 48px; }
+  /* TL;DR 下方的甘特图：15 个工作日一格，任务名写在横条里。直角彩色横条，颜色取自首页 Toolbox 卡片封面 */
+  .gantt { margin-top: 40px; }
+  .gantt-row { display: grid; grid-template-columns: repeat(15, 1fr); padding: 3px 0; background-image: linear-gradient(#ececef, #ececef), linear-gradient(#ececef, #ececef), linear-gradient(#ececef, #ececef), linear-gradient(#ececef, #ececef); background-size: 1px 100%, 1px 100%, 1px 100%, 1px 100%; background-repeat: no-repeat; background-position: 0 0, 33.333% 0, 66.666% 0, 100% 0; }
+  .gantt-head { padding: 0 0 10px; }
+  .gantt-head + .gantt-row { padding-top: 4px; }
+  .gantt-wk { padding-left: 12px; font-size: 13px; font-weight: 600; color: var(--label); }
+  .gantt-item { display: flex; align-items: center; min-height: 44px; padding: 8px 14px; }
+  .gantt-task { font-size: 14px; font-weight: 600; line-height: 19px; letter-spacing: -0.1px; }
+  .gantt-item--data { background: #5050F0; color: #fff; }
+  .gantt-item--key { background: #F5A6C6; color: #111; }
+  .gantt-item--align { background: #5BD1AC; color: #111; }
+  .gantt-item--ship { background: #F7CB15; color: #111; }
   .fact-label { font-size: 14px; font-weight: 500; line-height: 21px; letter-spacing: -0.28px; color: var(--label); }
   .fact-value { margin-top: 6px; font-size: 17px; line-height: 27.2px; letter-spacing: -0.34px; color: var(--body); }
   /* TL;DR 里的关键数字 */
@@ -180,6 +211,78 @@
 
   /* 研究方法对比表：风格参考 tablereferece.jpg（选中列整块蓝底白字，其余米色底） */
   .rq { margin-top: 64px; }
+  .hyp { margin-top: 64px; }
+  /* 设计稿三联图：图里的文字去掉了，标题用 HTML 写，三列对齐图中三个页面 */
+  .screens { margin: 0; }
+  .screens-cap { display: grid; grid-template-columns: 31.25fr 31.65fr 31.7fr; column-gap: 1.36%; padding: 0 1.2% 0 1.47%; margin-top: 16px; }
+  .screens-cap span { text-align: center; font-size: 16px; font-weight: 500; letter-spacing: -0.2px; color: var(--heading); }
+  /* Design Decisions：大字编号决策 + 小字说明 + 来源 insight；其余改动放小列表 */
+  .h2 + .decisions { margin-top: 40px; }
+  .dec-body { margin-top: 8px; font-size: 17px; font-weight: 400; line-height: 27.2px; letter-spacing: -0.34px; color: var(--body); }
+  .dec-from { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; padding: 6px 12px 6px 10px; border-radius: 8px; background: #f4f4f5; font-size: 14px; font-weight: 400; letter-spacing: -0.1px; color: rgb(82, 82, 91); transition: background .2s ease-out; }
+  .dec-from svg { width: 14px; height: 14px; color: var(--label); }
+  .dec-from b { font-weight: 600; color: var(--accent); }
+  .dec-from:hover { background: #e8f0fc; }
+  [id^="insight-"] { scroll-margin-top: 120px; }
+  .steps.decisions li + li { margin-top: 40px; }
+  /* Study Design：竖向时间轴。左列时间，中间圆点 + 竖线，右列内容 */
+  .tl { list-style: none; margin-top: 40px; padding: 0; }
+  .tl-item { position: relative; display: grid; grid-template-columns: 96px 1fr; column-gap: 40px; padding-bottom: 48px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before { content: ""; position: absolute; left: 116px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+  .tl-item::after { content: ""; position: absolute; left: 120px; top: 22px; bottom: 6px; width: 1px; background: var(--line); }
+  .tl-item:last-child::after { display: none; }
+  .tl-time { padding-top: 1px; font-size: 14px; font-weight: 500; line-height: 20px; color: var(--accent); text-align: right; }
+  .tl-body { padding-left: 24px; }
+  .tl-title { font-size: 20px; font-weight: 600; line-height: 1.3; letter-spacing: -0.02em; color: var(--heading); }
+  .tl-title + .body { margin-top: 6px; }
+  .tl-list { margin-top: 6px; padding-left: 20px; font-size: 17px; line-height: 27.2px; letter-spacing: -0.34px; color: var(--body); }
+  .tl-list li + li { margin-top: 2px; }
+  .tl-qs { margin-top: 14px; padding-left: 0; list-style: none; counter-reset: q; }
+  .tl-qs li { counter-increment: q; position: relative; padding-left: 32px; font-size: 17px; line-height: 27.2px; letter-spacing: -0.34px; color: var(--heading); }
+  .tl-qs li::before { content: "Q" counter(q); position: absolute; left: 0; font-weight: 600; color: var(--label); }
+  .tl-qs li + li { margin-top: 10px; }
+  /* 模板任务：引文样式（左侧竖线、无底色），和下方灰底 AI 卡片区分开 */
+  .tl-task { margin: 16px 0 0; padding: 2px 0 2px 18px; border-left: 3px solid var(--heading); }
+  .tl-task p:last-child { margin-top: 6px; font-size: 17px; line-height: 27.2px; letter-spacing: -0.34px; color: var(--heading); }
+  /* Choosing Methods：配色取自开头甘特图。选中的实色卡片：Interview 粉、User Testing 主色蓝（都取自开头时间轴），撞色对比；没选的白底实线框 */
+  .choices { display: grid; gap: 40px; margin-top: 40px; }
+  .choice { --pick: #F5A6C6; --pick-ink: #111; --pick-pill: #111; --pick-pill-ink: #fff; }
+  .choice--b { --pick: #5050F0; --pick-ink: #fff; --pick-pill: #fff; --pick-pill-ink: #111; }
+  .choice .card.card--pick, .choice .card.card--pick .choice-name, .choice .card.card--pick .choice-list, .choice .card.card--pick .choice-em { color: var(--pick-ink); }
+  .choice .card.card--pick .choice-pill { background: var(--pick-pill); color: var(--pick-pill-ink); }
+  .choice--b .card.card--pick .choice-list li::before { background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.2l2.6 2.6L13 6.4' fill='none' stroke='%235050F0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 18px no-repeat; }
+  .choice .card { padding: 28px; border-radius: 16px; }
+  .choice .card.card--pick { background: var(--pick); box-shadow: none; }
+  .choice .card:not(.card--pick) { background: #fff; box-shadow: 0 0 0 1px #e4e4e7; }
+  .choice-pill { display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 999px; background: #111; color: #fff; font-size: 13px; font-weight: 500; letter-spacing: 0.065px; }
+  .choice .card:not(.card--pick) .choice-pill { background: #f4f4f5; color: rgb(82, 82, 91); }
+  .choice-name { margin-top: 14px; font-size: 22px; font-weight: 600; line-height: 1.3; letter-spacing: -0.02em; color: #111; }
+  .choice .card:not(.card--pick) .choice-name { color: rgb(63, 63, 70); }
+  .choice-list { margin-top: 14px; padding: 0; list-style: none; font-size: 16px; line-height: 25.6px; letter-spacing: -0.32px; color: #111; }
+  .choice-list li { position: relative; padding-left: 28px; }
+  .choice-list li + li { margin-top: 8px; }
+  .choice-list li::before { content: ""; position: absolute; left: 0; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: #111 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.2l2.6 2.6L13 6.4' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 18px no-repeat; }
+  .choice .card:not(.card--pick) .choice-list { color: rgb(82, 82, 91); }
+  .choice .card:not(.card--pick) .choice-list li::before { background: #d4d4d8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M6 9h6' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / 18px no-repeat; }
+  .choice-em { font-weight: 700; color: #111; }
+  /* 荧光笔高亮：实色黄，两端硬边斜切；换行时每行都保留斜切 */
+  .hl {
+    color: inherit;
+    background: linear-gradient(100deg, transparent 0.35em, #FCE38A 0.35em, #FCE38A calc(100% - 0.35em), transparent calc(100% - 0.35em));
+    padding: 0.05em 0.4em;
+    margin: 0 -0.25em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  /* 数字并列卡片；Next Step 说明里的黄点对应下方点击热力图里的黄色圆圈 */
+  .clicks { display: grid; gap: 10px; margin-top: 12px; }
+  .click { display: grid; grid-template-columns: 14px auto 1fr; align-items: baseline; column-gap: 10px; }
+  .click-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #F5C116; vertical-align: -1px; }
+  .click-num { font-size: 28px; font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--heading); }
+  .click-label { font-size: 14px; color: var(--body); }
+  .clicks + .body { margin-top: 16px; }
+  .clicks--plain .click { grid-template-columns: auto 1fr; }
   .rq .h3 + .method-table-wrap { margin-top: 24px; }
   .method-table-wrap { margin-top: 40px; overflow-x: auto; }
   .method-table {
@@ -342,6 +445,23 @@
     color: var(--heading);
   }
   .steps.insights li + li { margin-top: 24px; }
+  /* Key Insights：按对应的假设分两组 */
+  .h2 + .ins-group { margin-top: 40px; }
+  .ins-group + .ins-group { margin-top: 48px; }
+  /* 假设 02 这一组下面接两张 persona 卡片，和 insight 文字左对齐 */
+  .ins-detail { margin-top: 32px; margin-left: 56px; font-size: 17px; font-weight: 400; line-height: 27.2px; letter-spacing: -0.34px; color: var(--body); }
+  .personas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .persona { --tint: #e8f0fc; --ink: var(--accent); padding: 28px; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px var(--line); }
+  .persona--career { --tint: #fdece6; --ink: #d9573a; }
+  .persona-head { display: flex; align-items: center; gap: 16px; }
+  .persona-avatar { flex: none; width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background: var(--tint); }
+  /* 头像：Open Peeps 半身像（Pablo Stanley，CC0），衣服和皮肤按 openpeeps.com showcase 的方式上了色 */
+  .persona-avatar img { display: block; width: 100%; height: 100%; }
+  .persona-name { font-size: 20px; font-weight: 600; line-height: 1.3; letter-spacing: -0.02em; color: var(--heading); }
+  .persona-who { margin-top: 2px; font-size: 15px; line-height: 22px; color: var(--label); }
+  .persona-label { margin-top: 24px; font-size: 14px; font-weight: 500; color: var(--label); }
+  .persona-asks { margin-top: 10px; padding: 0; list-style: none; display: grid; gap: 8px; justify-items: start; }
+  .persona-asks li { position: relative; padding: 10px 14px; border-radius: 14px 14px 14px 4px; background: #f4f4f5; font-size: 16px; line-height: 23px; letter-spacing: -0.2px; color: var(--heading); }
   .steps.insights .n { font-size: 28px; line-height: 1.2; font-weight: 500; color: var(--accent); }
 
   /* 2x2 白色卡片 */
@@ -354,6 +474,7 @@
   .h3 + .cards { margin-top: 14px; }
   .h2 + .cards { margin-top: 40px; }
   .media + .cards { margin-top: 24px; }
+  .body + .cards { margin-top: 24px; }
   .cards--3 { grid-template-columns: repeat(3, 1fr); }
   .card .fact-label + .body { margin-top: 8px; }
   .card .h4 + .body { margin-top: 6px; }
@@ -504,6 +625,24 @@
 
   /* ---------- Phone (按 390 宽实测) ---------- */
   @media (max-width: 809px) {
+    .bigstats > div { padding: 2px 12px; }
+    .bigstat-num { font-size: 30px; }
+    .bigstat-label { font-size: 13px; margin-top: 6px; }
+    .gantt { padding: 14px 10px 10px; }
+    .gantt-item { padding: 6px 8px; }
+    .gantt-task { font-size: 11px; line-height: 14px; }
+    .gantt-wk { font-size: 11px; padding-left: 4px; }
+    .screens-cap span { font-size: 12px; }
+      .dec-body { font-size: 16px; line-height: 25.6px; }
+    .personas { grid-template-columns: 1fr; }
+    .persona { padding: 20px; }
+    .ins-detail { margin-left: 40px; margin-top: 24px; }
+    .tl { margin-top: 32px; }
+    .tl-item { grid-template-columns: 1fr; padding-left: 28px; padding-bottom: 36px; }
+    .tl-item::before { left: 0; }
+    .tl-item::after { left: 4px; }
+    .tl-time { text-align: left; }
+    .tl-body { padding-left: 0; margin-top: 4px; }
     :root { --gutter: 20px; }
     .nav-inner { height: 56px; padding-right: 18px; }
     .nav-links { font-size: 14px; line-height: 17px; letter-spacing: normal; gap: 0; }
@@ -532,6 +671,7 @@
     .intro + .section { padding-top: 64px; }
     .group + .group { margin-top: 64px; }
     .wide-media { margin-top: 24px; aspect-ratio: 350 / 166; }
+    .wide-media + .body { margin-top: 24px; }
     .body + .flow { margin-top: 24px; }
     .stat { font-size: 32px; }
     .quote { padding: 24px; }
@@ -609,8 +749,31 @@
       <div><p class="fact-label">Timeline</p><p class="fact-value">3 weeks</p></div>
       <div><p class="fact-label">Role</p><p class="fact-value">Solo UX Researcher</p></div>
       <div><p class="fact-label">Team</p><p class="fact-value">Project Manager<br>Developer</p></div>
-      <div><p class="fact-label">Methods</p><p class="fact-value">Web Analytics<br>Heatmap Analysis<br>User Interviews<br>Usability Testing<br>Prototyping</p></div>
-      <div class="fact-full"><p class="fact-label">TL;DR</p><p class="fact-value">I led this rapid research project end to end, partnering with business stakeholders to identify problems and implement changes that lifted sign-up conversion from <strong class="metric">9.3% to 24.7%</strong> within a month, alongside a <strong class="metric">10% drop in bounce rate</strong> and an <strong class="metric">80%+ task success rate</strong>. I took a mixed-methods approach: website analytics revealed what was going wrong, and user interviews and usability testing explained why.</p></div>
+      <div><p class="fact-label">Methods</p><p class="fact-value">Web Analytics<br>User Interviews<br>Usability Testing<br>Prototyping</p></div>
+      <div class="fact-full"><p class="fact-label">TL;DR</p><p class="fact-value">I led this rapid research project end to end, partnering with business stakeholders to identify problems and implement changes that lifted sign-up conversion from <strong class="metric">9.3% to 24.7%</strong> within a month, alongside a <strong class="metric">10% drop in bounce rate</strong>. I took a mixed-methods approach: website analytics revealed what was going wrong, and user interviews and usability testing explained why.</p></div>
+    </div>
+    <div class="gantt" role="img" aria-label="Three-week timeline. Week 1: analyze site data and prioritize problems. Week 2, Monday to Tuesday: user study. Week 2, Wednesday to Friday: propose changes and align with stakeholders. Week 3: get stakeholder approval and implement.">
+      <div class="gantt-row gantt-head"><span class="gantt-wk" style="grid-column: 1 / 6">Week 1</span><span class="gantt-wk" style="grid-column: 6 / 11">Week 2</span><span class="gantt-wk" style="grid-column: 11 / 16">Week 3</span></div>
+      <div class="gantt-row"><div class="gantt-item gantt-item--data" style="grid-column: 1 / 6"><span class="gantt-task">Analyze site data &amp; prioritize problems</span></div></div>
+      <div class="gantt-row"><div class="gantt-item gantt-item--key" style="grid-column: 6 / 8"><span class="gantt-task">User study</span></div></div>
+      <div class="gantt-row"><div class="gantt-item gantt-item--align" style="grid-column: 8 / 11"><span class="gantt-task">Propose changes &amp; align with stakeholders</span></div></div>
+      <div class="gantt-row"><div class="gantt-item gantt-item--ship" style="grid-column: 11 / 16"><span class="gantt-task">Get stakeholder approval &amp; implement</span></div></div>
+    </div>
+  </section>
+
+  <!-- Scoping：35 个网站 → 12 个问题 → 4 个研究课题 -->
+  <section class="container section">
+    <div class="group">
+      <p class="eyebrow">Scoping</p>
+      <h2 class="h2">Narrowing 12 problems across 35 websites down to four</h2>
+      <p class="body">At Indiana University, I owned routine performance reporting and benchmarking for 35 university websites.</p>
+      <p class="body">I tracked two signals across these sites: ❶ landing pages with a high bounce rate, and ❷ keywords that showed up unusually often in internal search. Together they flagged 12 potential problems.</p>
+      <p class="body">I prioritized those with <mark class="hl">high traffic and no clear cause</mark>, which left 4 to research. This case study walks through one of them.</p>
+      <div class="wide-media media media--natural"><img src="scoping.png" alt="Scoping spreadsheet listing flagged pages across IU sites, with entry rate, bounce rate, traffic, traffic source, next step, a hypothesis and a research plan for each"></div>
+      <aside class="ai-note">
+        <p class="ai-label"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5l1.6 4.9 4.9 1.6-4.9 1.6L8 14.5l-1.6-4.9L1.5 8l4.9-1.6z" fill="currentColor"/></svg>How I would speed this up with AI today</p>
+        <p class="body">I&rsquo;d use Siteimprove&rsquo;s Ask AI (Conversational Analytics) to query the data in plain language, like which pages get the most traffic or which have low conversion. It requires an Advanced Analytics subscription.</p>
+      </aside>
     </div>
   </section>
 
@@ -619,113 +782,170 @@
     <div class="group">
       <p class="eyebrow">Context</p>
       <h2 class="h2">Spotting a high-traffic page that was losing visitors</h2>
-      <p class="body">At Indiana University, I owned routine performance reporting and benchmarking for 35 university websites. One page stood out: the landing page for Peer Coach, a service from the undergraduate education office where trained undergraduates coach younger students on academics and careers. The page had an 85% bounce rate, and only 9.3% of visitors went on to the sign-up page. Because it draws heavy daily traffic, I prioritized it for deeper research.</p>
+      <p class="body">This case study focuses on the landing page for Peer Coach, a service from the undergraduate education office where trained undergraduates coach younger students on academics and careers.</p>
+      <p class="body">The page drew heavy traffic, but most visitors left without signing up.</p>
+      <div class="bigstats">
+        <div><p class="bigstat-num bigstat-num--neutral">1,000+</p><p class="bigstat-label">visitors a day</p></div>
+        <div><p class="bigstat-num bigstat-num--bad">85%</p><p class="bigstat-label">bounce rate</p></div>
+        <div><p class="bigstat-num bigstat-num--bad">9.3%</p><p class="bigstat-label">went on to sign up</p></div>
+      </div>
       <div class="wide-media media media--natural"><img src="before-landing.png" alt="The original IU Peer Coaches landing page: a long bulleted list of what peer coaches can help with and no clear call to action"></div>
     </div>
   </section>
 
-  <!-- Forming Hypotheses：章节标题 + 热力图占位 + 两张假设卡片 -->
+  <!-- Forming Hypotheses：章节标题 + 正文 + 三张数据卡片 + 假设编号列表 + 审查热力图 -->
   <section class="container section">
     <div class="group">
       <p class="eyebrow">Forming Hypotheses</p>
       <h2 class="h2">Reading behavior data to see where visitors dropped off</h2>
-      <p class="body">I started by building hypotheses from the site&rsquo;s behavior data: heatmaps, click maps, traffic sources, site search queries and user journeys. A UX audit of the page alongside the heatmap flagged a wall of text, weak visual hierarchy, no clear call to action, key information hidden in accordions, and two different services sharing one page.</p>
-      <div class="wide-media media media--natural"><img src="ux-audit-heatmap.png" alt="UX audit of the original landing page with heatmap hotspots on Make an Appointment and Current Peer Coaches, annotated for lack of CTA and a text wall"></div>
+      <p class="body">A UX audit and the site&rsquo;s analytics data helped me form early hypotheses about the cause, which set the direction for user research.</p>
       <div class="cards cards--3">
         <div class="card">
           <p class="fact-label">Traffic Source</p>
-          <p class="stat">58.2%</p>
-          <p class="body">came directly and another 23.9% from the admissions website. Students arrived on purpose, so intent wasn&rsquo;t the problem.</p>
+          <div class="clicks clicks--plain">
+            <div class="click"><span class="click-num">58.2%</span><span class="click-label">Direct</span></div>
+            <div class="click"><span class="click-num">23.9%</span><span class="click-label">Admissions website</span></div>
+          </div>
+          <p class="body">Students arrived on purpose, so intent wasn&rsquo;t the problem.</p>
         </div>
         <div class="card">
           <p class="fact-label">Next Step</p>
-          <div class="bars">
-            <div class="bar-row">
-              <span class="bar-label">Current coach info</span><span class="bar-num">14.4%</span>
-              <span class="bar-track"><span class="bar-fill" style="width: 100%"></span></span>
-            </div>
-            <div class="bar-row">
-              <span class="bar-label">Schedule an appointment</span><span class="bar-num">5.4%</span>
-              <span class="bar-track"><span class="bar-fill bar-fill--muted" style="width: 37.5%"></span></span>
-            </div>
+          <div class="clicks clicks--plain">
+            <div class="click"><span class="click-num">14.4%</span><span class="click-label">Current Peer Coaches</span></div>
+            <div class="click"><span class="click-num">5.4%</span><span class="click-label">Make an Appointment</span></div>
           </div>
-          <p class="body">Nearly 3&times; more visitors checked the coaches than tried to book. Students wanted to see who they&rsquo;d meet first, and the workflow got in the way.</p>
+          <p class="body">Click map from Siteimprove (<span class="click-dot" role="img" aria-label="yellow circles"></span> below): <mark class="hl">students wanted to see the coaches&rsquo; profiles before booking</mark>.</p>
         </div>
         <div class="card">
           <p class="fact-label">Scroll Depth</p>
           <p class="stat">25.6%</p>
-          <p class="body">average scroll depth. Most visitors never got past the top of the page, which suggested the content wasn&rsquo;t answering their questions.</p>
+          <p class="body">average scroll depth. <mark class="hl">Most visitors didn&rsquo;t scroll down</mark>.</p>
         </div>
       </div>
+      <div class="hyp">
+        <p class="eyebrow eyebrow--sub">Hypotheses</p>
+        <ol class="steps insights">
+          <li><span class="n">01</span><span>The page doesn&rsquo;t give students what they need: they want to see a coach&rsquo;s profile before deciding to sign up.</span></li>
+          <li><span class="n">02</span><span>With no clear call to action, students don&rsquo;t know what to do next.</span></li>
+        </ol>
+      </div>
+      <div class="wide-media media media--natural"><img src="ux-audit-heatmap.png" alt="UX audit of the original landing page with heatmap hotspots on Make an Appointment and Current Peer Coaches, annotated for lack of CTA and a text wall"></div>
     </div>
   </section>
 
-  <!-- Choosing Methods：章节标题 + 方法对比表 -->
+  <!-- Choosing Methods：研究问题作大标题 + 两组方法选择卡片 -->
   <section class="container section">
     <div class="group">
       <p class="eyebrow">Choosing Methods</p>
-      <h2 class="h2">Moving to primary research to quickly validate the hypotheses</h2>
-      <div class="rq">
-        <p class="eyebrow eyebrow--sub">Research Question</p>
-        <h3 class="h3">Why were visitors leaving the landing page without signing up?</h3>
-        <div class="method-table-wrap">
-          <table class="method-table">
-            <thead>
-              <tr><th class="dim"></th><th class="pick" scope="col">User Interviews + Moderated Usability Testing</th><th class="rest" scope="col">Survey</th><th class="rest" scope="col">Unmoderated Usability Testing</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th class="dim" scope="row">Time &amp; cost</th>
-                <td class="pick"><div class="cell"><svg class="ic" role="img" aria-label="Strength"><use href="#i-yes"/></svg><span>My office was in the library, so I could reach students on the spot</span></div></td>
-                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Trade-off"><use href="#i-mid"/></svg><span>Quick to send, but slow to collect enough responses</span></div></td>
-                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Limitation"><use href="#i-no"/></svg><span>Needs a testing platform and a paid participant panel</span></div></td>
-              </tr>
-              <tr>
-                <th class="dim" scope="row">Generalizability</th>
-                <td class="pick"><div class="cell"><svg class="ic" role="img" aria-label="Trade-off"><use href="#i-mid"/></svg><span>Small sample, but analytics already covered the broad patterns</span></div></td>
-                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Strength"><use href="#i-yes"/></svg><span>Large sample, results generalize</span></div></td>
-                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Trade-off"><use href="#i-mid"/></svg><span>Larger sample than moderated sessions</span></div></td>
-              </tr>
-              <tr>
-                <th class="dim" scope="row">Depth of insight</th>
-                <td class="pick"><div class="cell"><svg class="ic" role="img" aria-label="Strength"><use href="#i-yes"/></svg><span>Can watch real behavior and ask why in the moment</span></div></td>
-                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Limitation"><use href="#i-no"/></svg><span>Shows what, not why</span></div></td>
-                <td class="rest"><div class="cell"><svg class="ic" role="img" aria-label="Trade-off"><use href="#i-mid"/></svg><span>Shows behavior, but no follow-up questions</span></div></td>
-              </tr>
-            </tbody>
-          </table>
+      <h2 class="h2">Why were visitors leaving the landing page without signing up?</h2>
+      <div class="choices">
+        <div class="choice choice--a">
+          <p class="eyebrow eyebrow--sub">Interview</p>
+          <div class="cards">
+            <div class="card card--pick">
+              <span class="choice-pill">Chosen</span>
+              <p class="choice-name">Intercept interview</p>
+              <ul class="choice-list">
+                <li>Our office was inside the library, so <strong class="choice-em">recruiting was fast and free</strong></li>
+                <li>More participants, from a more <strong class="choice-em">diverse pool</strong> of students</li>
+                <li>The question didn&rsquo;t need long sessions to answer</li>
+              </ul>
+            </div>
+            <div class="card">
+              <span class="choice-pill">Not chosen</span>
+              <p class="choice-name">In-depth interview</p>
+              <ul class="choice-list">
+                <li>Richer data, but higher recruiting and incentive costs</li>
+                <li>Longer timeline</li>
+                <li>Better suited to early-stage, generative research</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="choice choice--b">
+          <p class="eyebrow eyebrow--sub">User Testing</p>
+          <div class="cards">
+            <div class="card card--pick">
+              <span class="choice-pill">Chosen</span>
+              <p class="choice-name">Moderated user testing</p>
+              <ul class="choice-list">
+                <li>Paired with the interview, so I could tailor tasks to each student&rsquo;s experience with the site</li>
+                <li>Let me <strong class="choice-em">follow up</strong> in the moment</li>
+              </ul>
+            </div>
+            <div class="card">
+              <span class="choice-pill">Not chosen</span>
+              <p class="choice-name">Unmoderated user testing</p>
+              <ul class="choice-list">
+                <li>A large sample wasn&rsquo;t needed, since site analytics already covered that</li>
+                <li>The team had no paid testing platform</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Study Design：三张并排卡片（被试 / 访谈问题 / 测试任务） -->
+  <!-- Study Design：竖向时间轴，按一场 session 的顺序走一遍（招募 → 访谈 → 测试） -->
   <section class="container section">
     <div class="group">
       <p class="eyebrow">Study Design</p>
-      <h2 class="h2">Recruiting on the spot and pairing interviews with a realistic task</h2>
-      <div class="cards cards--3">
-        <div class="card">
-          <p class="fact-label">Participants</p>
-          <ul class="card-list">
-            <li>8 undergraduate students</li>
-            <li>Not working in the undergraduate education office</li>
-            <li>Recruited on the spot in the library</li>
-            <li>Every participant did both the interview and the test</li>
-          </ul>
-        </div>
-        <div class="card">
-          <p class="fact-label">Interview</p>
-          <ul class="card-list">
-            <li>Do you need academic advice (choosing or changing a major) or career advice (finding internships, planning a career path)? What does that look like?</li>
-            <li>What kind of help do you need most, and who do you think could help you?</li>
-          </ul>
-        </div>
-        <div class="card">
-          <p class="fact-label">Usability Test</p>
-          <p class="body">Starting from the landing page, imagine your advisor just sent you this resource. Decide whether you would schedule an appointment, and think aloud as you go.</p>
-        </div>
-      </div>
+      <h2 class="h2">Intercept Interview + Moderated User Testing</h2>
+      <ol class="tl">
+        <li class="tl-item">
+          <p class="tl-time">Before</p>
+          <div class="tl-body">
+            <h3 class="tl-title">Recruiting</h3>
+            <ul class="tl-list">
+              <li>8 undergraduates</li>
+              <li>Approached students waiting in the library lobby or in line for coffee at the caf&eacute;</li>
+              <li>Excluded students with part-time jobs in our office</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl-item">
+          <p class="tl-time">30 sec</p>
+          <div class="tl-body">
+            <h3 class="tl-title">Introduction</h3>
+            <ul class="tl-list">
+              <li>My name and role</li>
+              <li>The purpose of the study</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl-item">
+          <p class="tl-time">8 min</p>
+          <div class="tl-body">
+            <h3 class="tl-title">Semi-structured interview</h3>
+            <ul class="tl-list">
+              <li>2 main questions, plus follow-ups</li>
+            </ul>
+            <ol class="tl-qs">
+              <li>Do you need academic advice (choosing or changing a major) or career advice (finding internships, planning a career path)? What questions or challenges are you facing right now?</li>
+              <li>Who do you think could help you?</li>
+            </ol>
+          </div>
+        </li>
+        <li class="tl-item">
+          <p class="tl-time">7 min</p>
+          <div class="tl-body">
+            <h3 class="tl-title">Usability test</h3>
+            <ul class="tl-list">
+              <li>Started from a template task</li>
+              <li>Adjusted it to each student&rsquo;s situation from the interview</li>
+            </ul>
+            <blockquote class="tl-task"><p class="fact-label">Template task</p><p>Your advisor sent you this page and suggested talking to a peer coach. Look around and decide whether you&rsquo;d book a session. Please think aloud as you go.</p></blockquote>
+          </div>
+        </li>
+      </ol>
+      <aside class="ai-note">
+        <p class="ai-label"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5l1.6 4.9 4.9 1.6-4.9 1.6L8 14.5l-1.6-4.9L1.5 8l4.9-1.6z" fill="currentColor"/></svg>How AI would help</p>
+        <ul class="ai-list">
+          <li>Once I&rsquo;d settled on the methods, I&rsquo;d use AI to draft the recruiting criteria, interview questions and usability testing task.</li>
+          <li>I&rsquo;d turn this workflow into a <strong class="ai-em">Claude skill</strong>, so our team could reuse it on the similar projects we handle often.</li>
+        </ul>
+      </aside>
     </div>
   </section>
 
@@ -733,85 +953,87 @@
   <section class="container section">
     <div class="group">
       <p class="eyebrow">Key Insights</p>
-      <h2 class="h2">The sessions confirmed the hypotheses and surfaced two more problems</h2>
-      <ol class="steps insights">
-        <li><span class="n">01</span><span>Students want to see a coach&rsquo;s profile before deciding to book.</span></li>
-        <li><span class="n">02</span><span>Students with academic needs and those with career needs are two distinct groups.</span></li>
-        <li><span class="n">03</span><span>Students can&rsquo;t tell &ldquo;Peer Academic Coaches&rdquo; from &ldquo;Career Peers,&rdquo; or which one fits them.</span></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Personas：两张并排卡片 -->
-  <section class="container section">
-    <div class="group">
-      <p class="eyebrow">Personas</p>
-      <h2 class="h2">Two groups of students, two different questions</h2>
-      <div class="cards">
-        <div class="card">
-          <p class="fact-label">Persona 1</p>
-          <h3 class="h4">The Major Explorer</h3>
-          <p class="body">First-year students admitted without a declared major, weighing which major to choose in their second year.</p>
-          <p class="body">They want to know:</p>
-          <ul class="card-list">
-            <li>How to explore their interests through courses and extracurriculars</li>
-            <li>How seniors who chose or switched majors made their decision</li>
-          </ul>
-        </div>
-        <div class="card">
-          <p class="fact-label">Persona 2</p>
-          <h3 class="h4">The Career Planner</h3>
-          <p class="body">Students who have already declared a major and are looking ahead to life after college.</p>
-          <p class="body">They want to know:</p>
-          <ul class="card-list">
-            <li>How to find an internship</li>
-            <li>What jobs their major can lead to</li>
-            <li>How to explore different career paths</li>
-          </ul>
+      <h2 class="h2">The sessions confirmed both hypotheses and added more detail</h2>
+      <div class="ins-group">
+        <p class="eyebrow eyebrow--sub">Hypothesis 01: confirmed</p>
+        <ol class="steps insights">
+          <li id="insight-01"><span class="n">01</span><span>Students want to see a coach&rsquo;s profile before deciding to book.</span></li>
+        </ol>
+      </div>
+      <div class="ins-group">
+        <p class="eyebrow eyebrow--sub">Hypothesis 02: confirmed, and we learned why</p>
+        <ol class="steps insights">
+          <li id="insight-02"><span class="n">02</span><span>Students with academic needs and those with career needs are two distinct groups.</span></li>
+          <li><span class="n">03</span><span>The names &ldquo;Peer Academic Coaches&rdquo; and &ldquo;Career Peers&rdquo; aren&rsquo;t intuitive, so students find them confusing.</span></li>
+        </ol>
+        <div class="ins-detail personas">
+          <div class="persona persona--explore">
+            <div class="persona-head">
+              <span class="persona-avatar"><img src="persona-explorer.svg" alt=""></span>
+              <div>
+                <h3 class="persona-name">The Major Explorer</h3>
+                <p class="persona-who">First-years still choosing a major</p>
+              </div>
+            </div>
+            <p class="persona-label">Wants to know</p>
+            <ul class="persona-asks">
+              <li>How do I explore my interests through courses and activities?</li>
+              <li>How did seniors choose or switch their majors?</li>
+            </ul>
+          </div>
+          <div class="persona persona--career">
+            <div class="persona-head">
+              <span class="persona-avatar"><img src="persona-planner.svg" alt=""></span>
+              <div>
+                <h3 class="persona-name">The Career Planner</h3>
+                <p class="persona-who">Students with a major, planning for after graduation</p>
+              </div>
+            </div>
+            <p class="persona-label">Wants to know</p>
+            <ul class="persona-asks">
+              <li>How do I find an internship?</li>
+              <li>What jobs can my major lead to?</li>
+              <li>How do I explore different career paths?</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Design Decisions：两列并排 + 前后对比图占位 -->
+  <!-- Design Decisions：两条编号决策 + 前后对比图 -->
   <section class="container section">
     <div class="group">
       <p class="eyebrow">Design Decisions</p>
       <h2 class="h2">Turning insights into two product changes</h2>
-      <div class="pair">
-        <div>
-          <h3 class="h4">Brought coach profiles onto the page</h3>
-          <p class="body">Coach profiles used to live only inside the scheduling system. I partnered with the developer to embed them on the web page, so students could see who the coaches were, and get interested, before deciding to book.</p>
-        </div>
-        <div>
-          <h3 class="h4">Split academic and career into two journeys</h3>
-          <p class="body">Instead of one page for both services, the landing page now sends students down separate academic and career paths from the start. Each group sees content that matches its needs and no longer has to guess which coach to pick.</p>
-        </div>
-      </div>
-      <p class="body pair-note">Alongside these, I added photos and student testimonials to the landing page, rewrote the content to answer the questions students actually asked, and cut the page from four screens of scrolling to two.</p>
+      <ol class="steps insights decisions">
+        <li><span class="n">01</span><div><span>Put coach profiles on the page</span>
+          <p class="dec-body">Profiles used to live only in the scheduling system. Now students see who they&rsquo;d meet before booking.</p>
+          <a class="dec-from" href="#insight-01"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v5.5A2.5 2.5 0 0 0 7.5 11H13M10 8l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Based on <b>insight 01</b></a></div></li>
+        <li><span class="n">02</span><div><span>Split academic and career into two paths</span>
+          <p class="dec-body">Students pick a path up front, so each group sees only what it needs and no longer has to decode the coach names.</p>
+          <a class="dec-from" href="#insight-02"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v5.5A2.5 2.5 0 0 0 7.5 11H13M10 8l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Based on <b>insights 02 &amp; 03</b></a></div></li>
+      </ol>
       <div class="wide-media media media--natural"><img src="userflow-before-after.png" alt="User flow before and after: before, students emailed by an advisor wondered how a session helps and who they would meet, then bounced; after, they pick an academic or career coach, see a coach profile, and schedule an appointment"></div>
-      <div class="wide-media media media--natural"><img src="design-solution.png" alt="Redesigned pages: a new landing page with photos and a student testimonial that splits into Peer Academic Coaches and Career Peers, plus two information pages with embedded coach profiles"></div>
+      <figure class="screens">
+        <div class="wide-media media media--natural"><img src="design-solution.png" alt="Redesigned pages: the landing page, the academic coach page and the career coach page, each with embedded coach profiles"></div>
+        <figcaption class="screens-cap"><span>Landing page</span><span>Academic coach page</span><span>Career coach page</span></figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- Impact：三张数字卡片 + 利益相关方引用 -->
+  <!-- Impact：两张数字卡片 + 利益相关方引用 -->
   <section class="container section">
     <p class="eyebrow">Impact</p>
-    <div class="cards cards--3">
+    <p class="body">Analytics data from Siteimprove, one month after the changes went live.</p>
+    <div class="cards">
       <div class="card">
         <p class="fact-label">Sign-up Conversion</p>
         <p class="stat">9.3% &rarr; 24.7%</p>
-        <p class="body">Conversion from the landing page to sign-up more than doubled within a month of launch.</p>
       </div>
       <div class="card">
         <p class="fact-label">Bounce Rate</p>
         <p class="stat">&minus;10%</p>
-        <p class="body">Fewer students left the landing page without taking a next step.</p>
-      </div>
-      <div class="card">
-        <p class="fact-label">Task Success</p>
-        <p class="stat">80%+</p>
-        <p class="body">In usability testing of the new design, more than 80% of students found the right coach and decided whether to book without help.</p>
       </div>
     </div>
     <blockquote class="quote">
