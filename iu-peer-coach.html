@@ -541,6 +541,43 @@
     margin-top: 24px;
   }
 
+  /* ---------- 右侧阅读进度条（同 adobe.html） ---------- */
+  #pnav { position: fixed; right: 3.23vw; top: 50%; transform: translateY(-50%); width: 2px; height: 120px; background: rgba(46,70,137,0.15); border-radius: 2px; z-index: 100; }
+  #pnav-fill { width: 100%; height: 0%; background: #000; border-radius: 2px; transition: height 0.1s; }
+
+  /* ---------- Takeaway：LinkedIn 帖子样式（同 adobe.html） ---------- */
+  .takeaway { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; }
+  .takeaway .li-post { flex: 0 1 552px; }
+  @media (max-width: 760px) {
+    .takeaway { flex-direction: column; gap: 0; }
+    .takeaway .li-post { flex: none; margin-top: 24px; }
+  }
+  .li-post { width: 100%; max-width: 552px; background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 8px; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  .li-header { display: flex; align-items: flex-start; gap: 8px; padding: 12px 16px 0; }
+  .li-avatar-link { flex: 0 0 auto; display: block; }
+  .li-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: #eee; display: block; }
+  .li-header-text { flex: 1 1 auto; min-width: 0; }
+  .li-name-link:hover .li-name { text-decoration: underline; }
+  .li-name { font-size: 14px; font-weight: 600; color: rgba(0,0,0,.9); line-height: 1.3; }
+  .li-name .li-degree { font-weight: 400; color: rgba(0,0,0,.6); }
+  .li-headline { font-size: 12px; color: rgba(0,0,0,.6); line-height: 1.3; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+  .li-meta { display: flex; align-items: center; gap: 4px; font-size: 12px; color: rgba(0,0,0,.6); margin-top: 2px; }
+  .li-meta .li-dot { opacity: .6; }
+  .li-follow-link { flex: 0 0 auto; }
+  .li-follow { background: none; border: none; font-size: 14px; font-weight: 600; color: #0a66c2; cursor: pointer; padding: 4px 0; font-family: inherit; }
+  .li-more { flex: 0 0 auto; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: rgba(0,0,0,.6); font-size: 18px; }
+  .li-body { padding: 12px 16px; font-size: 14px; line-height: 1.4; color: rgba(0,0,0,.9); white-space: pre-line; }
+  .li-stats { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; font-size: 12px; color: rgba(0,0,0,.6); }
+  .li-reactions { display: flex; align-items: center; gap: 4px; }
+  .li-reaction-icons { display: flex; }
+  .li-reaction-icons img { width: 16px; height: 16px; border-radius: 50%; display: block; margin-left: -4px; }
+  .li-reaction-icons img:first-child { margin-left: 0; }
+  .li-divider { height: 1px; background: rgba(0,0,0,.08); margin: 0 16px; }
+  .li-actions { display: flex; padding: 4px 8px; }
+  .li-action { flex: 1 1 0; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 0; font-size: 14px; font-weight: 600; color: rgba(0,0,0,.6); border-radius: 8px; }
+  .li-action svg { width: 20px; height: 20px; flex: 0 0 auto; }
+  @media (max-width: 480px) { .li-action { gap: 4px; font-size: 12px; } .li-action svg { width: 18px; height: 18px; } }
+
   /* ---------- More projects (同 index.html 卡片，缩小版) ---------- */
   .more { padding-top: 180px; }
   .more .h2 { color: var(--accent-strong); margin-top: 0; }
@@ -739,6 +776,8 @@
     </div>
   </div>
 </header>
+
+<div id="pnav" aria-hidden="true"><div id="pnav-fill"></div></div>
 
 <main>
 
@@ -1042,6 +1081,57 @@
     </blockquote>
   </section>
 
+  <!-- Takeaway：LinkedIn 帖子样式（同 adobe.html） -->
+  <section class="container section takeaway">
+    <p class="eyebrow">Takeaway</p>
+    <div class="li-post">
+      <div class="li-header">
+        <a class="li-avatar-link" href="https://www.linkedin.com/in/sixian-chen-51029125a/" target="_blank" rel="noopener noreferrer"><img class="li-avatar" src="avatar.png" alt=""></a>
+        <div class="li-header-text">
+          <a class="li-name-link" href="https://www.linkedin.com/in/sixian-chen-51029125a/" target="_blank" rel="noopener noreferrer"><p class="li-name">Sixian Chen <span class="li-degree">· 1st</span></p></a>
+          <p class="li-headline">Mixed-method UX Researcher | Rapid User Testing, Experimentation, Market Research | MS HCI/d at Indiana University</p>
+          <p class="li-meta"><span>2d</span><span class="li-dot">·</span><span>🌐</span></p>
+        </div>
+        <a class="li-follow-link" href="https://www.linkedin.com/in/sixian-chen-51029125a/" target="_blank" rel="noopener noreferrer"><button class="li-follow">+ Connect</button></a>
+        <div class="li-more">⋯</div>
+      </div>
+
+      <div class="li-body"><strong>Stakeholder management is a long game</strong>
+Working with stakeholders isn’t something you do well in a single project. It’s a reputation you build over time. Every time our team did rigorous research, delivered it quickly, and looked at the problem from the stakeholder’s point of view, including the strategic side and not just the research side, we earned a little more trust. We also offered help proactively, and teams remembered that.
+
+By the time this project came along, that trust was already there. It made it much easier to prioritize requests together, because stakeholders accepted why some problems had to wait, and it made it easier to get the changes approved and shipped. For me, the lesson is that good communication on a single project matters, but the real payoff comes from showing up consistently, so the next conversation starts from a better place.</div>
+
+      <div class="li-stats">
+        <div class="li-reactions">
+          <div class="li-reaction-icons"><img src="li_reaction_1.png" alt="Like"><img src="li_reaction_4.png" alt="Love"></div>
+          <span>Sixian Chen and 42 others</span>
+        </div>
+        <span>12 comments</span>
+      </div>
+
+      <div class="li-divider"></div>
+
+      <div class="li-actions">
+        <div class="li-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 22V11M2 13v7a2 2 0 002 2h13.5a2 2 0 002-1.7l1.4-8A2 2 0 0018.9 10H14V5a3 3 0 00-3-3l-1 5-3.5 5H2z"/></svg>
+          Like
+        </div>
+        <div class="li-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          Comment
+        </div>
+        <div class="li-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
+          Repost
+        </div>
+        <div class="li-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Send
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- More projects -->
   <section class="container more">
     <h2 class="h2">View more projects</h2>
@@ -1134,6 +1224,21 @@
     });
     table.after(stack);
   });
+</script>
+<script>
+  // 右侧阅读进度条：按页面滚动比例填充（同 adobe.html，这页没用 Lenis，直接听原生 scroll）
+  (() => {
+    const fill = document.getElementById('pnav-fill');
+    let ticking = false;
+    const update = () => {
+      const limit = document.documentElement.scrollHeight - window.innerHeight;
+      fill.style.height = (limit > 0 ? Math.min(100, window.scrollY / limit * 100) : 0) + '%';
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
 </script>
 </body>
 </html>
